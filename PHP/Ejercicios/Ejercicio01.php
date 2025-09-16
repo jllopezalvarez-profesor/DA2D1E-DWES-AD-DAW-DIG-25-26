@@ -18,12 +18,29 @@
         for ($otroNumero = 0; $otroNumero <= 10; $otroNumero++) {
             $producto = $numero * $otroNumero;
             echo "<li>{$numero} x {$otroNumero} = {$producto}</li>";
+            // echo "<li>" . $numero . " x " . $otroNumero . " = " . $producto . "</li>";
         }
-
-
         ?>
     </ul>
 
+    <h2>Generado con html en un for</h2>
+    <ul>
+        <?php
+        for ($otroNumero = 0; $otroNumero <= 10; $otroNumero++) { ?>
+            <li><?php echo $numero ?> x
+                <?php echo $otroNumero ?> =
+                <?php echo $numero * $otroNumero ?></li>
+        <?php
+        }
+        ?>
+    </ul>
+
+    <h2>Generado con html en un for con "dos puntos"</h2>
+    <ul>
+        <?php for ($otroNumero = 0; $otroNumero <= 10; $otroNumero++): ?>
+            <li><?php echo $numero ?> x <?php echo $otroNumero ?> = <?php echo $numero * $otroNumero ?></li>
+        <?php endfor ?>
+    </ul>
 
 
 
