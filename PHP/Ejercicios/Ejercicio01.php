@@ -27,7 +27,7 @@
     <ul>
         <?php
         for ($otroNumero = 0; $otroNumero <= 10; $otroNumero++) { ?>
-            <li><?php echo $numero ?> x
+            <li clas><?php echo $numero ?> x
                 <?php echo $otroNumero ?> =
                 <?php echo $numero * $otroNumero ?></li>
         <?php
@@ -47,11 +47,6 @@
 
 
 
-
-
-    <ul>
-        <li>n x m = producto</li>
-    </ul>
 
 
 </body>
