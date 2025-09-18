@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario para ejemplo de validación</title>
+</head>
+
+<body>
+    <h1>Formulario para ejemplo de validación</h1>
+    <form action="EjemploValidacionSanitizacion.php" method="post">
+        <p>
+            <label>Nombre: <input type="text" name="nombre"> </label>
+        </p>
+
+        <p>
+            <label>Edad: <input type="number" name="edad" required min="10" max="30"> </label>
+        </p>
+        <p><button type="submit">Enviar datos</button></p>
+    </form>
+
+</body>
+
+</html>
