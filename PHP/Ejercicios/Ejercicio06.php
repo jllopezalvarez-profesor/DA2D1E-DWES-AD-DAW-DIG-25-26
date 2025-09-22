@@ -27,6 +27,8 @@
     $inicio = filter_var($inicio, FILTER_VALIDATE_INT);
     $fin = $_POST['fin'] ?? '';
     $fin = filter_var($fin, FILTER_VALIDATE_INT);
+
+
     if ($inicio === false || $fin === false) {
 
         echo "<p>Error, alguno de los dos números no se ha recibido o no es un número entero.</p>";
