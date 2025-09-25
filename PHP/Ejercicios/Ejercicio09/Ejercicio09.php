@@ -119,8 +119,6 @@ if (!array_key_exists($paymentMethod, $paymentOptions)) {
                 <li>Comentarios: <?= $comments ?></li>
             </ul>
         <?php endif ?>
-
-        <p>Valor de botón pulsado <?php var_dump($_POST['submitAction']) ?></p>
     </div>
 </body>
 
