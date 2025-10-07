@@ -17,7 +17,7 @@ session_start();
     <?php
     session_regenerate_id(true);
 
-    // session_destroy();
+    session_destroy();
 
     ?>
     <p>Se ha cerrado la sesión de <?= $_SESSION['username'] ?></p>
