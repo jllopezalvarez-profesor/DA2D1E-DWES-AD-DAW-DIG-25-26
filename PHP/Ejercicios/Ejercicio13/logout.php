@@ -16,7 +16,8 @@ $fullName = $usersDetails[$userName];
 
 
 // Regenerar el id porque es un "evento crítico"
-// session_regenerate_id();
+session_regenerate_id();
+
 // Eliminar la sesión del usuario
 session_destroy();
 
