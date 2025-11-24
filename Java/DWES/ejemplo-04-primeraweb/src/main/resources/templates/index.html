@@ -1,12 +1,37 @@
-
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Index</title>
+    <style>
+        .red {
+            color: red;
+        }
+
+        .negrita {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 <h1>Esta es la página inicial de mi sitio web</h1>
-<p>Nombre del usuario <span th:text="${user.getFirstName()}"  >Nombre</span></p>
+<p>Usuario:</p>
+<ul>
+    <li th:text="${user.getEmail()}"></li>
+    <li th:text="${user.firstName}"></li>
+    <li th:text="${user.lastName}"></li>
+    <li th:text="${user.getBirthDate()}"></li>
+</ul>
+<p>Nombre del usuario <span th:text="${user.getFirstName()}">Nombre</span></p>
+
+<p> Hora a la que se ha generado la página:
+    <span th:classappend="${isBold?'negrita':''}"
+          th:attr="class=${isRed?'red':''},otro='otracosa'"
+          th:text="${currentTime}">Aquí quiero la hora</span>
+</p>
+<p th:if="${isRed}">En el modelo aparece que la fecha tiene que ser en color rojo</p>
+
+<p th:unless="${isBold}">En el modelo no se indica que sea negrita</p>
+
 </body>
 </html>
