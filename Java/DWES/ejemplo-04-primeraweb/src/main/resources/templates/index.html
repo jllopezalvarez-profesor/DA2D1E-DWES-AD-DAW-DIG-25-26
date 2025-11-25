@@ -29,9 +29,46 @@
           th:attr="class=${isRed?'red':''},otro='otracosa'"
           th:text="${currentTime}">Aquí quiero la hora</span>
 </p>
-<p th:if="${isRed}">En el modelo aparece que la fecha tiene que ser en color rojo</p>
+
+<div th:if="${isRed}">
+    <p>
+        En el modelo aparece que la fecha tiene que ser en color rojo
+    </p>
+    <p>Esto es otro párrafo que va junto al texto del color rojo</p>
+</div>
 
 <p th:unless="${isBold}">En el modelo no se indica que sea negrita</p>
+
+
+<h2>
+    Día de la semana obtenido con switch
+</h2>
+
+<div th:switch="${dayOfWeek}">
+    <p th:case="1">Lunes</p>
+    <p th:case="2">Martes</p>
+    <p th:case="3">Miércoles</p>
+    <p th:case="4">Jueves</p>
+    <p th:case="5">Viernes</p>
+    <p th:case="6">Sábado</p>
+    <p th:case="7">Domingo</p>
+    <p th:case="*">Valor no válido</p>
+</div>
+
+
+<h2>Listado de nombres generados</h2>
+<ul th:unless="${names.isEmpty()}">
+    <li>Nombre 0</li>
+    <li th:each="name, itemStat: ${names}"
+        th:text="${name}"
+        th:class="${itemStat.even?'red':''}"
+        th:attr="data-index=${itemStat.index}">Nombre 1
+    </li>
+    <li>Nombre 2</li>
+    <li>Nombre 3</li>
+    <li>Nombre 4</li>
+</ul>
+
 
 </body>
 </html>

@@ -2,6 +2,7 @@ package es.jllopezalvarez.dwes.spring.ejemplo04primeraweb.controllers;
 
 
 import es.jllopezalvarez.dwes.spring.ejemplo04primeraweb.entities.User;
+import es.jllopezalvarez.dwes.spring.ejemplo04primeraweb.services.RandomService;
 import es.jllopezalvarez.dwes.spring.ejemplo04primeraweb.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +15,12 @@ import java.util.Random;
 public class HomeController {
 
     private final UserService userService;
+    private final RandomService randomService;
     private int requestNumber = 0;
 
-    public HomeController(UserService userService) {
+    public HomeController(UserService userService, RandomService randomService) {
         this.userService = userService;
+        this.randomService = randomService;
     }
 
     //@RequestMapping( method = RequestMethod.GET, path = "/")
@@ -34,8 +37,11 @@ public class HomeController {
         mv.setViewName("index");
         mv.addObject("user", userInDb);
         mv.addObject("currentTime", LocalTime.now().toString());
-        mv.addObject("isRed", new Random().nextBoolean());
-        mv.addObject("isBold", new Random().nextBoolean());
+        Random random = new Random();
+        mv.addObject("isRed", random.nextBoolean());
+        mv.addObject("isBold", random.nextBoolean());
+        mv.addObject("dayOfWeek", random.nextInt(0, 8));
+        mv.addObject("names", randomService.getRandomNames(10));
 
 
         return mv;
