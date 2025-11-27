@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de personas</title>
+    <style>
+        table, td, th{
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+<h1>Listado de personas</h1>
+<table>
+    <thead>
+    <tr>
+        <th scope="col">DNI</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellidos</th>
+        <th scope="col">Fecha de nacimiento</th>
+        <th scope="col">Edad</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="persona: ${personas}" >
+        <td th:text="${persona.dni}">DNI</td>
+        <td th:text="${persona.nombre}">Nombre</td>
+        <td th:text="${persona.apellidos}">Apellidos</td>
+        <td th:text="${persona.fechaNacimiento}">Fecha de nacimiento</td>
+        <td th:text="${persona.edad}">Edad</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
