@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Predicción semanal del tiempo</title>
+</head>
+<body>
+<h1>
+    Predicción de la semana
+</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th scope="col"
+            th:each="prediccion: ${prediccionesSemanales}"
+            th:text="${prediccion.fecha}">Fecha
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:each="prediccion: ${prediccionesSemanales}">
+            <div>
+
+                <!--
+                        ◦ P < 25
+        ◦ 25 <= P < 50 https://www.aemet.es/imagenes/png/estado_cielo/12_g.png
+        ◦ 50 <= P < 75 https://www.aemet.es/imagenes/png/estado_cielo/14_g.png
+        ◦ P >= 75 https://www.aemet.es/imagenes/png/estado_cielo/25_g.png
+
+                -->
+                <img src="https://www.aemet.es/imagenes/png/estado_cielo/11_g.png"
+                     th:if="${prediccion.probabilidadPrecipitacion < 25}"
+                     th:alt="${prediccion.probabilidadPrecipitacion}">
+                <img src="https://www.aemet.es/imagenes/png/estado_cielo/12_g.png"
+                     th:if="${prediccion.probabilidadPrecipitacion >= 25 && prediccion.probabilidadPrecipitacion < 50}"
+                     th:alt="${prediccion.probabilidadPrecipitacion}">
+                <img
+                    src="https://www.aemet.es/imagenes/png/estado_cielo/14_g.png"
+                    th:if="${prediccion.probabilidadPrecipitacion >= 50 && prediccion.probabilidadPrecipitacion < 75}"
+                    th:alt="${prediccion.probabilidadPrecipitacion}">
+                <img
+                    src="https://www.aemet.es/imagenes/png/estado_cielo/25_g.png"
+                    th:if="${prediccion.probabilidadPrecipitacion >= 75}"
+                    th:alt="${prediccion.probabilidadPrecipitacion}">
+            </div>
+            <div th:text="${prediccion.probabilidadPrecipitacion}">Probabilidad</div>
+            <div th:text="${prediccion.temperaturaMinima}">Min</div>
+            <div th:text="${prediccion.temperaturaMaxima}">Max</div>
+            <div th:text="${prediccion.nivelAlertaUv}" class="" >Indice UV</div>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+
+
+</body>
+</html>

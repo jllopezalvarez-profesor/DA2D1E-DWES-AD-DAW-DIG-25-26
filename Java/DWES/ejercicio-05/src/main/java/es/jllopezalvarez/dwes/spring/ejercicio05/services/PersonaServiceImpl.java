@@ -29,7 +29,11 @@ public class PersonaServiceImpl implements PersonaService {
 
     @Override
     public Persona findOne() {
-        return null;
+        // if (faker.random().nextBoolean()) {}
+        if (faker.bool().bool()) {
+            return null;
+        }
+        return crearPersonaAleatoria();
     }
 
 

@@ -28,9 +28,11 @@ public class PersonaController {
     }
 
     @GetMapping("/personas/one")
-    public String listOne(){
+    public ModelAndView listOne(){
         System.out.println("PersonaController.listOne()");
-        return "personas/one";
+        ModelAndView mv = new ModelAndView("personas/one");
+        mv.addObject("persona", personaService.findOne());
+        return mv;
     }
 
 

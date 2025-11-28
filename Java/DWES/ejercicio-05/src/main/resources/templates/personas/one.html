@@ -1,11 +1,26 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Detalles de una persona</title>
 </head>
 <body>
 <h1>Detalles de una persona</h1>
+<p th:if="${persona==null}">No se ha encontrado una persona</p>
+<div th:if="${persona!=null}">
+    <dl>
+        <dt>Dni:</dt>
+        <dd th:text="${persona.dni}"></dd>
+        <dt>Nombre:</dt>
+        <dd th:text="${persona.nombre}"></dd>
+        <dt>Apellidos:</dt>
+        <dd th:text="${persona.apellidos}"></dd>
+        <dt>Fecha de nacimiento:</dt>
+        <dd th:text="${persona.fechaNacimiento}"></dd>
+        <dt>Edad:</dt>
+        <dd th:text="${persona.edad}"></dd>
+    </dl>
+</div>
 
 
 </body>
