@@ -6,9 +6,20 @@
 </head>
 <body>
 <h1>Listado de estudiantes</h1>
+<h2>Usando interpolación</h2>
+<ul th:remove="all-but-first">
+    <li th:each="student: ${students}" th:text="|${student.id} - ${student.firstName} ${student.lastName}|">Nombre del
+        Ejemplo de alumno 1
+    </li>
+    <li>Ejemplo de alumno 2</li>
+    <li>Ejemplo de alumno 3</li>
+</ul>
+
+<h2>Usando concatenación</h2>
 <ul>
-    <li th:each="student: ${students}" th:text="|${student.id} - ${student.firstName} ${student.lastName}|" >Nombre del alumno</li>
-    <li th:each="student: ${students}" th:text="${student.id} + ' - ' + ${student.firstName} + ' ' + ${student.lastName}" >Nombre del alumno</li>
+    <li th:each="student: ${students}"
+        th:text="${student.id} + ' - ' + ${student.firstName} + ' ' + ${student.lastName}">Nombre del alumno
+    </li>
 </ul>
 </body>
 </html>

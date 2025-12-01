@@ -4,11 +4,14 @@ import es.jllopezalvarez.dwes.spring.ejemplos.ejemplo05schoolspecificrepo.entiti
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Repository
 public class StudentRepositoryImpl implements StudentRepository {
 
-    final SortedMap<Long, Student> students = new TreeMap<>();
+    // private final AtomicLong counter = new  AtomicLong(1);
+
+    private final SortedMap<Long, Student> students = new TreeMap<>();
 
     @Override
     public List<Student> findAll() {
@@ -25,6 +28,7 @@ public class StudentRepositoryImpl implements StudentRepository {
         // Si el estudiante llega con id null es que es nuevo.
         if (student.getId() == null) {
             synchronized (students) {
+                //counter.incrementAndGet();
                 student.setId(getNewId());
                 students.put(student.getId(), student);
             }
