@@ -4,7 +4,6 @@ import es.jllopezalvarez.dwes.spring.ejemplos.ejemplo05schoolspecificrepo.entiti
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Repository
 public class StudentRepositoryImpl implements StudentRepository {

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de profesor</title>
+</head>
+<body>
+<th:block th:if="${isPresent}">
+    <h1 th:text="|${teacher.firstName} ${teacher.lastName}|">Nombre del profesor</h1>
+</th:block>
+<div th:if="${!isPresent}" th:remove="tag">
+    <h1>No se encuentra el profesor</h1>
+</div>
+
+</body>
+</html>

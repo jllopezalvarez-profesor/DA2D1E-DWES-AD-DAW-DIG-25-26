@@ -1,7 +1,7 @@
-package es.jllopezalvarez.dwes.spring.ejemplos.ejemplo05schoolspecificrepo.controllers;
+package es.jllopezalvarez.dwes.spring.ejemplos.ejemplo06schoolgenericrepo.controllers;
 
-import es.jllopezalvarez.dwes.spring.ejemplos.ejemplo05schoolspecificrepo.entities.Student;
-import es.jllopezalvarez.dwes.spring.ejemplos.ejemplo05schoolspecificrepo.services.StudentService;
+import es.jllopezalvarez.dwes.spring.ejemplos.ejemplo06schoolgenericrepo.entities.Student;
+import es.jllopezalvarez.dwes.spring.ejemplos.ejemplo06schoolgenericrepo.services.StudentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

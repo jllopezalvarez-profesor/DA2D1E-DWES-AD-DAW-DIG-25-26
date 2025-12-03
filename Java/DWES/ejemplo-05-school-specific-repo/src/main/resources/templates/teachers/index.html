@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de profesores</title>
+</head>
+<body>
+<h1>Listado de profesores</h1>
+<ul>
+    <li th:each="teacher: ${teachers}" th:text="|${teacher.id} - ${teacher.firstName} ${teacher.lastName}|">Nombre del
+        Ejemplo de profesor
+    </li>
+</ul>
+
+</body>
+</html>

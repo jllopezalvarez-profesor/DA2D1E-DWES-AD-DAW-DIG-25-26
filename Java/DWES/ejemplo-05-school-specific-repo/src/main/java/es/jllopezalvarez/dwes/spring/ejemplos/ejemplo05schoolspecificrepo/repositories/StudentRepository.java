@@ -1,5 +1,6 @@
 package es.jllopezalvarez.dwes.spring.ejemplos.ejemplo05schoolspecificrepo.repositories;
 
+
 import es.jllopezalvarez.dwes.spring.ejemplos.ejemplo05schoolspecificrepo.entities.Student;
 
 import java.util.List;
