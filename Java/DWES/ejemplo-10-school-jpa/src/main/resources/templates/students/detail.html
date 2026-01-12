@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalles de estudiante</title>
+</head>
+<body>
+<h1 th:text="|${student.getFirstName()} ${student.getLastName()}|">Nombre y apellidos</h1>
+<p>
+    DNI: <span th:text="${student.documentId}">DNI</span>
+</p>
+<p>
+    Fecha de nacimiento <span th:text="${student.birthDate}">YYYY-MM-DD</span>
+</p>
+
+</body>
+</html>

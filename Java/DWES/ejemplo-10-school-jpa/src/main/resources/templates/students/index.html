@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de estudiantes</title>
+</head>
+<body>
+<h1>Listado de estudiantes</h1>
+<ul th:if="${!students.isEmpty()}">
+    <li th:each="student : ${students}">
+        <a th:href="@{/students/{id}(id=${student.studentId})}"
+                th:text="|${student.getFirstName()} ${student.getLastName()}|"></a>
+    </li>
+</ul>
+
+
+</body>
+</html>
