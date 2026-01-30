@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="~{fragments/fragments :: head('Ejemplos Spring Boot')}">
+    <title>Ejemplos Spring Boot</title>
+</head>
+<body>
+<div class="container">
+
+    <header th:replace="~{fragments/fragments :: header}"></header>
+    <div class="container">
+
+        <h2>Ejemplos relacionados con mappings</h2>
+        <ul>
+            <li><a th:href="@{/mappings-01-restricciones}">Ejemplos de restricciones en mappings. Por cabecera, por
+                expresión regular, etc.</a></li>
+            <li><a th:href="@{/mappings-02-wildcards}">Ejemplos de uso de comodines (wildcards) en rutas. Uso de *, **,
+                y {*variable}</a></li>
+        </ul>
+    </div>
+
+</div>
+
+
+</body>
+</html>
