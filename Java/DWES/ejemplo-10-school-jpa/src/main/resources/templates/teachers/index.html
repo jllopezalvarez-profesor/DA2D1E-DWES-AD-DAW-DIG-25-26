@@ -8,7 +8,7 @@
 <h1>Listado de profesores</h1>
 <ul>
     <li th:each="teacher: ${teachers}">
-        <a th:text="${teacher.firstName + ' ' + teacher.lastName}"
+        <a th:text="${teacher.firstName + ' ' + teacher.lastName + ' / ' + teacher.department.name}"
            th:href="@{/teachers/{id}(id=${teacher.teacherId})}"> </a>
 
 

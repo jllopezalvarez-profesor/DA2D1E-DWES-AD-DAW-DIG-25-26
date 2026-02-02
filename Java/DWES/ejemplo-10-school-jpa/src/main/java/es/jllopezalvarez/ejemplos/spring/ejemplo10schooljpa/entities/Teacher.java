@@ -28,4 +28,8 @@ public class Teacher {
     private LocalDate birthDate;
     @Column(nullable = false)
     private LocalDate startDate;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id", nullable = false)
+    private Department department;
 }
