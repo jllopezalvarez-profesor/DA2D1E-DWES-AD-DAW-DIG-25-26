@@ -1,7 +1,10 @@
 package es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.services;
 
+import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.entities.Module;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.entities.Student;
+import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.repositories.ModuleRepository;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.repositories.StudentRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,9 +13,11 @@ import java.util.Optional;
 @Service
 public class StudentServiceImpl implements StudentService {
     private final StudentRepository studentRepository;
+    private final ModuleRepository moduleRepository;
 
-    public StudentServiceImpl(StudentRepository studentRepository) {
+    public StudentServiceImpl(StudentRepository studentRepository, ModuleRepository moduleRepository) {
         this.studentRepository = studentRepository;
+        this.moduleRepository = moduleRepository;
     }
 
     @Override
@@ -23,5 +28,22 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Optional<Student> findById(Long studentId) {
         return studentRepository.findById(studentId);
+    }
+
+    @Override
+    public void addModule( Long studentId, String moduleId) {
+        // Busco el estudiante.
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(()-> new EntityNotFoundException(String.format("No se ha encontrado el estudiante con id %d.", studentId)));
+
+        // Ya tengo el estudiante, buscar el módulo que quiero añadir
+        Module module = moduleRepository.findById(moduleId)
+                .orElseThrow(()-> new EntityNotFoundException(String.format("No se ha encontrado el módulo con id %s.", moduleId)));
+
+        // Añado el módulo al estudiante
+        student.getModules().add(module);
+
+        // Guardar cambios
+        studentRepository.save(student);
     }
 }

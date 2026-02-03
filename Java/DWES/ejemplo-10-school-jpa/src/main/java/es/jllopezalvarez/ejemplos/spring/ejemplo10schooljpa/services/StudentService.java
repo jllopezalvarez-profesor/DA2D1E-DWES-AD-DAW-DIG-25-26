@@ -9,4 +9,7 @@ import java.util.Optional;
 public interface StudentService {
     List<Student> findAll();
     Optional<Student> findById(Long studentId);
+
+
+    void addModule( Long studentId, String moduleId);
 }

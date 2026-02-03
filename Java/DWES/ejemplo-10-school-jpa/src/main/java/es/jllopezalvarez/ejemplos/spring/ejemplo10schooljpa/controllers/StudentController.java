@@ -32,4 +32,14 @@ public class StudentController {
         mv.addObject("student", student);
         return mv;
     }
+
+    @GetMapping("{studentId}/add-module/{moduleId}")
+    public void addModule(@PathVariable Long studentId,
+                          @PathVariable String moduleId){
+        studentService.addModule(studentId, moduleId);
+
+    }
+
+
+
 }
