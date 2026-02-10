@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario example-01</title>
+</head>
+<body>
+<h1>Formulario example-01</h1>
+<form method="post">
+    <p>
+        <label>Nombre:
+            <input type="text" name="first-name" th:value="${firstName}" />
+        </label>
+
+    </p>
+
+    <p>
+        <button type="submit">Enviar</button>
+    </p>
+</form>
+</body>
+</html>

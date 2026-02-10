@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario example-02</title>
+</head>
+<body>
+<h1>Formulario example-02</h1>
+<form method="post">
+    <p th:if="${errorMessage}" th:text="${errorMessage}"></p>
+    <p>
+        <label>Nombre:<input type="text" name="firstName" th:value="${firstName}"/></label>
+    </p>
+    <p>
+        <label>Apellidos:<input type="text" name="lastName" th:value="${lastName}"/></label>
+    </p>
+    <p>
+        <label>Fecha de nacimiento:<input type="date" name="birthDate" th:value="${birthDate}"/></label>
+    </p>
+    <p><label>Estatura:<input type="text" name="height"></label></p>
+    <p>
+        <label>
+            Provincia de nacimiento:
+            <select name="birthProvince" required th:value="${birthProvince}">
+                <option value="">Seleccione</option>
+                <option value="08" th:selected="${birthProvince == '08'}">Barcelona</option>
+                <option value="28" th:selected="${birthProvince == '28'}">Madrid</option>
+
+            </select>
+        </label>
+    </p>
+
+
+
+
+
+    <p>
+        <button type="submit">Enviar</button>
+    </p>
+</form>
+</body>
+</html>
