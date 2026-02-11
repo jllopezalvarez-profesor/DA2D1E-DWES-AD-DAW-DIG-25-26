@@ -4,7 +4,9 @@ package es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter

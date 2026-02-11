@@ -3,7 +3,6 @@ package es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.controllers;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.entities.Teacher;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.services.TeacherService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

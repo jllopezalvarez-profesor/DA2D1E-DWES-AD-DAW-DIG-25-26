@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo estudiante</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+<h1>Nuevo estudiante</h1>
+<form method="post" th:object="${student}">
+    <div class="mb-3">
+        <label for="document-id" class="form-label">DNI / NIE / Pasaporte:</label>
+        <input type="text" class="form-control" id="document-id" th:field="*{documentId}">
+    </div>
+    <div class="mb-3">
+        <label for="first-name" class="form-label">Nombre:</label>
+        <input type="text" class="form-control" id="first-name" th:field="*{firstName}">
+    </div>
+    <div class="mb-3">
+        <label for="last-name" class="form-label">Apellidos:</label>
+        <input type="text" class="form-control" id="last-name" th:field="*{lastName}">
+    </div>
+    <div class="mb-3">
+        <label for="birth-date" class="form-label">Fecha de nacimiento:</label>
+        <input type="date" class="form-control" id="birth-date" th:field="*{birthDate}">
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Enviar</button>
+
+</form>
+</div>
+
+</body>
+</html>

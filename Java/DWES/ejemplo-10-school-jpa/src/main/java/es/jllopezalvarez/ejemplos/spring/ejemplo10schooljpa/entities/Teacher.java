@@ -2,7 +2,6 @@ package es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.core.annotation.Order;
 
 import java.time.LocalDate;
 
