@@ -10,6 +10,7 @@
     <li th:each="student : ${students}">
         <a th:href="@{/students/{id}(id=${student.studentId})}"
                 th:text="|${student.getFirstName()} ${student.getLastName()}|"></a>
+        <span th:if="${student.hasScholarship}"> Con beca</span>
     </li>
 </ul>
 

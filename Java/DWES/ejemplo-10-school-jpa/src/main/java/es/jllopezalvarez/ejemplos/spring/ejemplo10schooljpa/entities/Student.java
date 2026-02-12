@@ -1,10 +1,7 @@
 package es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -18,6 +15,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +27,12 @@ public class Student {
     private String firstName;
     @Column(length = 100)
     private String lastName;
+    @Basic(optional = false)
+    @Column(nullable = false)
     private LocalDate birthDate;
+    @Basic(optional = false)
+    @Column(nullable = false)
+    private boolean hasScholarship;
 
     @ManyToMany
     @JoinTable(

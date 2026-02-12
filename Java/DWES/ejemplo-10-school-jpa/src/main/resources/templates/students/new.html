@@ -7,29 +7,61 @@
 </head>
 <body>
 <div class="container">
-<h1>Nuevo estudiante</h1>
-<form method="post" th:object="${student}">
-    <div class="mb-3">
-        <label for="document-id" class="form-label">DNI / NIE / Pasaporte:</label>
-        <input type="text" class="form-control" id="document-id" th:field="*{documentId}">
-    </div>
-    <div class="mb-3">
-        <label for="first-name" class="form-label">Nombre:</label>
-        <input type="text" class="form-control" id="first-name" th:field="*{firstName}">
-    </div>
-    <div class="mb-3">
-        <label for="last-name" class="form-label">Apellidos:</label>
-        <input type="text" class="form-control" id="last-name" th:field="*{lastName}">
-    </div>
-    <div class="mb-3">
-        <label for="birth-date" class="form-label">Fecha de nacimiento:</label>
-        <input type="date" class="form-control" id="birth-date" th:field="*{birthDate}">
-    </div>
+    <h1>Nuevo estudiante</h1>
+    <form method="post" th:object="${student}">
+        <div class="mb-3">
+            <label for="document-id" class="form-label">DNI / NIE / Pasaporte:</label>
+            <input type="text" class="form-control" id="document-id" th:field="*{documentId}">
+        </div>
+        <div class="mb-3">
+            <label for="first-name" class="form-label">Nombre:</label>
+            <input type="text" class="form-control" id="first-name" th:field="*{firstName}">
+        </div>
+        <div class="mb-3">
+            <label for="last-name" class="form-label">Apellidos:</label>
+            <input type="text" class="form-control" id="last-name" th:field="*{lastName}">
+        </div>
+        <div class="mb-3">
+            <label for="birth-date" class="form-label">Fecha de nacimiento:</label>
+            <input type="date" class="form-control" id="birth-date" th:field="*{birthDate}">
+        </div>
+
+        <div class="mb-3">
+            <fieldset>
+                <legend>Módulos en los que se matricula</legend>
+
+                <div class="form-check" th:each="module:${modules}">
+                    <input class="form-check-input" type="checkbox"
+                           id="module-check"
+                           th:field="*{modules}"
+                           th:value="${module.moduleId}"
+                           th:id="|module-check${module.moduleId}|">
+                    <label class="form-check-label"
+                           for="module-check"
+                           th:for="|module-check${module.moduleId}|"
+                           th:text="${module.name}">
+                        Nombre del módulo
+                    </label>
+                </div>
 
 
-    <button type="submit" class="btn btn-primary">Enviar</button>
+            </fieldset>
+        </div>
 
-</form>
+        <div class="mb-3">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="has-scholarship"
+                th:field="*{hasScholarship}">
+                <label class="form-check-label" for="has-scholarship">
+                    Estudiante con beca
+                </label>
+            </div>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Enviar</button>
+
+    </form>
 </div>
 
 </body>

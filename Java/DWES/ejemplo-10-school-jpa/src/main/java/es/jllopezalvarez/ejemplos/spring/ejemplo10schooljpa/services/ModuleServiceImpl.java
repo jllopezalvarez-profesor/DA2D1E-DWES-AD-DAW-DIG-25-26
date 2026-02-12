@@ -7,6 +7,8 @@ import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.repositories.Student
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ModuleServiceImpl implements ModuleService {
     private final ModuleRepository moduleRepository;
@@ -32,5 +34,10 @@ public class ModuleServiceImpl implements ModuleService {
 
         // Guardar cambios
         moduleRepository.save(module);
+    }
+
+    @Override
+    public List<Module> findAll() {
+        return moduleRepository.findAll();
     }
 }
