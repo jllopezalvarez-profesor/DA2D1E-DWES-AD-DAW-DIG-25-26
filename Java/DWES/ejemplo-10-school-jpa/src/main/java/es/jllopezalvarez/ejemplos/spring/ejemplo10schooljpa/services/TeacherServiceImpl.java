@@ -2,6 +2,7 @@ package es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.services;
 
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.entities.Department;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.entities.Teacher;
+import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.mappers.TeacherMapper;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.models.NewTeacherModel;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.repositories.DepartmentRepository;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.repositories.TeacherRepository;
@@ -33,20 +34,40 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public Teacher createNew(NewTeacherModel newTeacherModel) {
-        Department department = departmentRepository
-                .findById(newTeacherModel.getDepartmentId())
-                .orElseThrow(() -> new EntityNotFoundException(String.format("No se encuentra el departamento con ID %s", newTeacherModel.getDepartmentId())));
+        Department department = departmentRepository.findById(newTeacherModel.getDepartmentId()).orElseThrow(() -> new EntityNotFoundException(String.format("No se encuentra el departamento con ID %s", newTeacherModel.getDepartmentId())));
 
-        Teacher teacher = Teacher.builder()
-                .email(newTeacherModel.getEmail())
-                .firstName(newTeacherModel.getFirstName())
-                .lastName(newTeacherModel.getLastName())
-                .birthDate(newTeacherModel.getBirthDate())
-                .startDate(newTeacherModel.getStartDate())
-                .department(department)
-                .build();
+        Teacher teacher = TeacherMapper.map(newTeacherModel);
+        teacher.setDepartment(department);
 
         return teacherRepository.save(teacher);
 
+    }
+
+    @Override
+    public Teacher update(Integer teacherId, NewTeacherModel teacherModel) {
+        // 1 - Obtener el teacher de la BD
+        // 1.1 - ¿Si no está, excepción?
+        Teacher teacher = teacherRepository
+                .findById(teacherId)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        String.format("No se encuentra el profesor con id %d", teacherId)));
+
+        // 2 - Actualizar campos
+        teacher.setEmail(teacherModel.getEmail());
+        teacher.setFirstName(teacherModel.getFirstName());
+        teacher.setLastName(teacherModel.getLastName());
+        teacher.setBirthDate(teacherModel.getBirthDate());
+        teacher.setStartDate(teacherModel.getStartDate());
+
+        // 3 - Actualizar departamento // Con GetReferenceById
+        System.out.println("Antes de getReferenceById");
+        Department department = departmentRepository.getReferenceById(teacherModel.getDepartmentId());
+        System.out.println("Después de getReferenceById, pero antes de mostrar el nombre del departamento");
+        System.out.printf("Nombre del departamento: %s", department.getName());
+        System.out.println("Después de mostrar el nombre del departamento");
+        teacher.setDepartment(department);
+
+        // 3 - Guardar
+        return teacherRepository.save(teacher);
     }
 }

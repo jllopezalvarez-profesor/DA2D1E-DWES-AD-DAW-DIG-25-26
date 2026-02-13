@@ -2,11 +2,13 @@ package es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.controllers;
 
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.entities.Department;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.entities.Teacher;
+import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.mappers.TeacherMapper;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.models.NewTeacherModel;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.services.DepartmentService;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.services.TeacherService;
+import jakarta.persistence.EntityNotFoundException;
+import org.apache.tomcat.util.modeler.BaseAttributeFilter;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -47,18 +49,51 @@ public class TeacherController {
     }
 
     @PostMapping("/new")
-    public String newTeacherPost(@ModelAttribute("teacher") NewTeacherModel newTeacherModel) {
-        System.out.printf("Profesor recibido:\n%s\n", newTeacherModel);
-        teacherService.createNew(newTeacherModel);
+    public String newTeacherPost(@ModelAttribute("teacher") NewTeacherModel newTeacherModel, Model model) {
+
+        try {
+            teacherService.createNew(newTeacherModel);
+        } catch (Exception e) {
+            model.addAttribute("error", String.format("Se ha producido un error: %s", e.getMessage()));
+            return "teachers/new";
+        }
 
         return "redirect:/teachers";
+    }
 
-        // return "teachers/new";
+    @GetMapping("/{teacherId}/edit")
+    public String editTeacherGet(@PathVariable Integer teacherId,
+                                 Model model) {
+        Teacher teacher = teacherService
+                .findById(teacherId)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        String.format("No se encuentra el profesor con id %d", teacherId)
+                ));
+        NewTeacherModel teacherModel = TeacherMapper.map(teacher);
+
+        model.addAttribute("teacher", teacherModel);
+//        model.addAttribute("teacherId", teacherId);
+
+        return "teachers/edit";
+    }
+
+    @PostMapping("/{teacherId}/edit")
+    public String editTeacherPost(@PathVariable Integer teacherId,
+                                  @ModelAttribute("teacher") NewTeacherModel newTeacherModel,
+                                  Model model) {
+        try {
+            teacherService.update(teacherId, newTeacherModel);
+        } catch (Exception e) {
+            model.addAttribute("error", String.format("Se ha producido un error: %s", e.getMessage()));
+            return "teachers/edit";
+        }
+
+        return "redirect:/teachers";
     }
 
 
     @ModelAttribute("departments")
-    public List<Department> getAllDepartments(){
+    public List<Department> getAllDepartments() {
         return departmentService.findAll();
     }
 

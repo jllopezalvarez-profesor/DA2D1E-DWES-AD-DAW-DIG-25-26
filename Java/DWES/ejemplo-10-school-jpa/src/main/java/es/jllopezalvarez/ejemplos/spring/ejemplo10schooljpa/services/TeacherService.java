@@ -12,4 +12,6 @@ public interface TeacherService {
     Optional<Teacher> findById(Integer teacherId);
 
     Teacher createNew(NewTeacherModel newTeacherModel);
+
+    Teacher update(Integer teacherId, NewTeacherModel newTeacherModel);
 }

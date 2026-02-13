@@ -9,6 +9,10 @@
 <div class="container">
 <h1>Nuevo profesor</h1>
 <form method="post" th:object="${teacher}">
+    <div class="alert alert-danger" role="alert"
+         th:if="${error != null}" th:text="${error}">
+        A simple danger alert—check it out!
+    </div>
     <div class="mb-3">
         <label for="email" class="form-label">Correo electrónico:</label>
         <input type="email" class="form-control" id="email" th:field="*{email}">
