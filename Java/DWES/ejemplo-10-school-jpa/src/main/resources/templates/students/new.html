@@ -8,22 +8,23 @@
 <body>
 <div class="container">
     <h1>Nuevo estudiante</h1>
-    <form method="post" th:object="${student}">
+    <form method="post" th:object="${student}" th:novalidate="${!clientValidationEnabled}">
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
         <div class="mb-3">
             <label for="document-id" class="form-label">DNI / NIE / Pasaporte:</label>
-            <input type="text" class="form-control" id="document-id" th:field="*{documentId}">
+            <input type="text" class="form-control" id="document-id" th:field="*{documentId}" required>
         </div>
         <div class="mb-3">
             <label for="first-name" class="form-label">Nombre:</label>
-            <input type="text" class="form-control" id="first-name" th:field="*{firstName}">
+            <input type="text" class="form-control" id="first-name" th:field="*{firstName}" required>
         </div>
         <div class="mb-3">
             <label for="last-name" class="form-label">Apellidos:</label>
-            <input type="text" class="form-control" id="last-name" th:field="*{lastName}">
+            <input type="text" class="form-control" id="last-name" th:field="*{lastName}" required>
         </div>
         <div class="mb-3">
             <label for="birth-date" class="form-label">Fecha de nacimiento:</label>
-            <input type="date" class="form-control" id="birth-date" th:field="*{birthDate}">
+            <input type="date" class="form-control" id="birth-date" th:field="*{birthDate}" required>
         </div>
 
         <div class="mb-3">

@@ -4,6 +4,7 @@ import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.entities.Student;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.models.NewStudentModel;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.services.ModuleService;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.services.StudentService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +17,17 @@ public class StudentController {
     private final StudentService studentService;
     private final ModuleService moduleService;
 
+    @Value("${shop.validation.client-validation-enabled}")
+    private boolean clientValidationEnabled;
+
     public StudentController(StudentService studentService, ModuleService moduleService) {
         this.studentService = studentService;
         this.moduleService = moduleService;
+    }
+
+    @ModelAttribute(name = "clientValidationEnabled")
+    public boolean getClientValidationEnabled(){
+       return this.clientValidationEnabled;
     }
 
     @GetMapping({"", "/"})
