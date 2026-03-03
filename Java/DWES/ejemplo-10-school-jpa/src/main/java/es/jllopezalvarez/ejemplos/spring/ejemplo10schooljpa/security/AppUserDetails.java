@@ -32,4 +32,8 @@ public class AppUserDetails implements UserDetails {
     public String getUsername() {
         return this.appUser.getEmail();
     }
+
+    public String getFullName(){
+        return String.join(" ", this.appUser.getFirstName(), this.appUser.getLastName());
+    }
 }

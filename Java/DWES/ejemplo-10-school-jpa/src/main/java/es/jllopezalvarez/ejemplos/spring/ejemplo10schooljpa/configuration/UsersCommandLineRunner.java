@@ -28,7 +28,7 @@ public class UsersCommandLineRunner implements CommandLineRunner {
 
         AppUser user = AppUser.builder()
                 // .userId() // No hace falta porque estoy creando nuevo
-                .email("jllopezalvarez@educa.madrid.org")
+                .email("admin@prueba.com")
                 .password(encodedPassword)
                 .firstName("José Luis")
                 .lastName("López Álvarez")

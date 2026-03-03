@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<html lang="es" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
 <head>
     <meta charset="UTF-8">
     <title>Listado de profesores</title>
@@ -8,13 +10,17 @@
 </head>
 <body>
 <div class="container">
+    <div th:replace="~{fragments :: header}"></div>
+
     <h1>Listado de profesores</h1>
+    <p sec:authentication="principal.username"></p>
+    <p th:text="${#authentication.principal.getFullName()}"></p>
     <p><a th:href="@{/teachers/new}" class="btn btn-primary">Nuevo profesor</a></p>
     <ul>
         <li th:each="teacher: ${teachers}">
             <a th:text="${teacher.firstName + ' ' + teacher.lastName + ' / ' + teacher.department.name}"
                th:href="@{/teachers/{id}(id=${teacher.teacherId})}"> </a>
-            <a th:href="@{/teachers/{id}/edit(id=${teacher.teacherId})}" class="btn btn-secondary" >Modificar</a>
+            <a th:href="@{/teachers/{id}/edit(id=${teacher.teacherId})}" class="btn btn-secondary">Modificar</a>
 
 
         </li>

@@ -1,10 +1,12 @@
 package es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.configuration;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,6 +15,9 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfiguration {
+
+    @Value("${shop.security.bcrypt.cost.factor}")
+    private int hashCostFactor;
 
     @Bean
     public SecurityFilterChain getSecurityFilterChain(HttpSecurity http) throws Exception {
@@ -25,11 +30,16 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/teachers", "/teachers/*").permitAll())
                 // Cualquier otra cosa (incluye los formularios de students) solo para usuarios autenticados
                 .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
-                // Activar esquema HTTP basic con configuración por defecto. Como usamos Forms Authentication, no se activa.
-                //.httpBasic(Customizer.withDefaults());
+                // No aplicar la protección CSRF a ciertas rutas de la aplicación
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/teachers/*", "/h2-console/*"))
-                .headers(AbstractHttpConfigurer::disable)
-                .formLogin(Customizer.withDefaults());
+                // Configurar las cabeceras X-Frame-Options para que no se pueda cargar
+                // la aplicación dentro de frames de otro dominio.
+                .headers(config -> config.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
+                // Activar la autenticación con formularios y sesión, con opciones por defecto.
+                .formLogin(Customizer.withDefaults())
+                // Desactivar esquema HTTP basic, porque se usa Forms Authentication.
+                .httpBasic(AbstractHttpConfigurer::disable);
+
         return http.build();
     }
 
@@ -40,12 +50,13 @@ public class SecurityConfiguration {
         // return NoOpPasswordEncoder.getInstance();
 
         // BCryptPasswordEncoder - Más o menos antiguo pero seguro
-        return new BCryptPasswordEncoder();
+        // return new BCryptPasswordEncoder();
+        // Cambiando el número de iteraciones para hacer que tarde más en calcular el hash.
+        return new BCryptPasswordEncoder(hashCostFactor);
 
         // Pbkdf2PasswordEncoder - Más seguro, necesita más parámetros
         // return new Pbkdf2PasswordEncoder("Secret", 10, 10, 10);
     }
-
 
 
 }

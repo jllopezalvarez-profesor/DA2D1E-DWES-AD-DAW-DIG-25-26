@@ -2,16 +2,19 @@
 <html lang="es" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"/>
     <title>Detalles de estudiante</title>
 </head>
 <body>
-<h1 th:text="|${student.getFirstName()} ${student.getLastName()}|">Nombre y apellidos</h1>
-<p>
-    DNI: <span th:text="${student.documentId}">DNI</span>
-</p>
-<p>
-    Fecha de nacimiento <span th:text="${student.birthDate}">YYYY-MM-DD</span>
-</p>
-
+<div class="container">
+    <div th:replace="~{fragments :: header}"></div>
+    <h1 th:text="|${student.getFirstName()} ${student.getLastName()}|">Nombre y apellidos</h1>
+    <p>
+        DNI: <span th:text="${student.documentId}">DNI</span>
+    </p>
+    <p>
+        Fecha de nacimiento <span th:text="${student.birthDate}">YYYY-MM-DD</span>
+    </p>
+</div>
 </body>
 </html>

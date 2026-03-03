@@ -4,11 +4,14 @@ import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.entities.Student;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.models.NewStudentModel;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.services.ModuleService;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.services.StudentService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Random;
 
 @Controller
 @RequestMapping("/students")
@@ -17,18 +20,12 @@ public class StudentController {
     private final StudentService studentService;
     private final ModuleService moduleService;
 
-    @Value("${shop.validation.client-validation-enabled}")
-    private boolean clientValidationEnabled;
 
     public StudentController(StudentService studentService, ModuleService moduleService) {
         this.studentService = studentService;
         this.moduleService = moduleService;
     }
 
-    @ModelAttribute(name = "clientValidationEnabled")
-    public boolean getClientValidationEnabled(){
-       return this.clientValidationEnabled;
-    }
 
     @GetMapping({"", "/"})
     public ModelAndView index() {
@@ -39,6 +36,9 @@ public class StudentController {
 
     @GetMapping("/{studentId}")
     public ModelAndView detail(@PathVariable Long studentId) {
+        if ((new Random()).nextBoolean()) {
+            throw new EntityNotFoundException("No se encuentra el estudiante - forzado");
+        }
         ModelAndView mv = new ModelAndView("students/detail");
         Student student = studentService.findById(studentId).orElseThrow();
         mv.addObject("student", student);

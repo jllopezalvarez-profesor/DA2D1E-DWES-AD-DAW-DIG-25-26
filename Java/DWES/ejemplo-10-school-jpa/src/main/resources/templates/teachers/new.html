@@ -7,54 +7,54 @@
 </head>
 <body>
 <div class="container">
-<h1>Nuevo profesor</h1>
-<form method="post" th:object="${teacher}">
-    <div class="alert alert-danger" role="alert"
-         th:if="${error != null}" th:text="${error}">
-        A simple danger alert—check it out!
-    </div>
-    <div class="mb-3">
-        <label for="email" class="form-label">Correo electrónico:</label>
-        <input type="email" class="form-control" id="email" th:field="*{email}">
-    </div>
-    <div class="mb-3">
-        <label for="first-name" class="form-label">Nombre:</label>
-        <input type="text" class="form-control" id="first-name" th:field="*{firstName}">
-    </div>
-    <div class="mb-3">
-        <label for="last-name" class="form-label">Apellidos:</label>
-        <input type="text" class="form-control" id="last-name" th:field="*{lastName}">
-    </div>
-    <div class="mb-3">
-        <label for="birth-date" class="form-label">Fecha de nacimiento:</label>
-        <input type="date" class="form-control" id="birth-date" th:field="*{birthDate}">
-    </div>
-    <div class="mb-3">
-        <label for="start-date" class="form-label">Fecha de inicio:</label>
-        <input type="date" class="form-control" id="start-date" th:field="*{startDate}">
-    </div>
-    <div class="mb-3">
-        <label for="department-id" class="form-label">Departamento:</label>
-        <select class="form-select" id="department-id" th:field="*{departmentId}">
-            <option value="">Seleccione departamento</option>
-            <th:block th:remove="all-but-first">
-            <option th:each="department: ${departments}"
-                    th:value="${department.departmentId}"
-                    th:text="${department.name}"
-                    value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-            </th:block>
-        </select>
+    <div th:replace="~{fragments :: header}"></div>
+    <h1>Nuevo profesor</h1>
+    <form method="post" th:object="${teacher}" th:novalidate="${!clientValidationEnabled}">
+        <div class="alert alert-danger" role="alert"
+             th:if="${error != null}" th:text="${error}">
+            A simple danger alert—check it out!
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Correo electrónico:</label>
+            <input type="email" class="form-control" id="email" th:field="*{email}">
+        </div>
+        <div class="mb-3">
+            <label for="first-name" class="form-label">Nombre:</label>
+            <input type="text" class="form-control" id="first-name" th:field="*{firstName}">
+        </div>
+        <div class="mb-3">
+            <label for="last-name" class="form-label">Apellidos:</label>
+            <input type="text" class="form-control" id="last-name" th:field="*{lastName}">
+        </div>
+        <div class="mb-3">
+            <label for="birth-date" class="form-label">Fecha de nacimiento:</label>
+            <input type="date" class="form-control" id="birth-date" th:field="*{birthDate}">
+        </div>
+        <div class="mb-3">
+            <label for="start-date" class="form-label">Fecha de inicio:</label>
+            <input type="date" class="form-control" id="start-date" th:field="*{startDate}">
+        </div>
+        <div class="mb-3">
+            <label for="department-id" class="form-label">Departamento:</label>
+            <select class="form-select" id="department-id" th:field="*{departmentId}">
+                <option value="">Seleccione departamento</option>
+                <th:block th:remove="all-but-first">
+                    <option th:each="department: ${departments}"
+                            th:value="${department.departmentId}"
+                            th:text="${department.name}"
+                            value="1">One
+                    </option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </th:block>
+            </select>
 
 
-    </div>
+        </div>
 
 
-
-
-    <button type="submit" class="btn btn-primary">Enviar</button>
-</form>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
 </div>
 
 </body>
