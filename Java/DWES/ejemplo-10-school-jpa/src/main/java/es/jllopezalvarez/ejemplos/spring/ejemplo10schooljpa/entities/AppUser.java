@@ -22,6 +22,7 @@ public class AppUser  {
     @Column(nullable = false, unique = true)
     private String email;
 
+
     @Column(nullable = false, length = 100)
     private String password;
 
