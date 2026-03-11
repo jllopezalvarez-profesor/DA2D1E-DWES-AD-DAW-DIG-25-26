@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
-@Component
+// @Component // Se comenta la línea para que no sea un bean y no se ejecute, porque ahora los usuarios y roles se cargarán con SQL
 public class UsersCommandLineRunner implements CommandLineRunner {
 
 

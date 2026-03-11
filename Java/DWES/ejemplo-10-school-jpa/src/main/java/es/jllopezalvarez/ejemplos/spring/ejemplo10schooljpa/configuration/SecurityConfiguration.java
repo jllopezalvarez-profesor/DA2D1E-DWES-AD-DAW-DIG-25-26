@@ -1,5 +1,6 @@
 package es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.configuration;
 
+import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.security.SecurityMonitor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,23 +21,29 @@ public class SecurityConfiguration {
     private int hashCostFactor;
 
     @Bean
-    public SecurityFilterChain getSecurityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain getSecurityFilterChain(HttpSecurity http, SecurityMonitor securityMonitor) throws Exception {
         http
-                // Autorizar el acceso a la consola H2 para cualquier usuario
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/h2-console", "/h2-console/*").permitAll())
-                // Autorizar el acceso al listado de estudiantes a cualquier usuario
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/students", "/students/").permitAll())
-                // Autorizar el acceso a cualquier cosa de teachers (incluidos formularios) a cualquier usuario
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/teachers", "/teachers/*").permitAll())
-                // Cualquier otra cosa (incluye los formularios de students) solo para usuarios autenticados
-                .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
+                .authorizeHttpRequests(auth -> auth
+                        // Autorizar el acceso a la consola H2 para cualquier usuario
+                        .requestMatchers("/h2-console", "/h2-console/*").permitAll()
+                        // Autorizar el acceso al listado de estudiantes a cualquier usuario
+                        .requestMatchers("/students", "/students/").permitAll()
+                        // Autorizar el acceso a cualquier cosa de teachers (incluidos formularios) a cualquier usuario
+                        .requestMatchers("/teachers", "/teachers/*").permitAll()
+                        // Cualquier otra cosa (incluye los formularios de students) solo para usuarios autenticados
+                        .anyRequest().authenticated())
                 // No aplicar la protección CSRF a ciertas rutas de la aplicación
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/teachers/*", "/h2-console/*"))
                 // Configurar las cabeceras X-Frame-Options para que no se pueda cargar
                 // la aplicación dentro de frames de otro dominio.
                 .headers(config -> config.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
                 // Activar la autenticación con formularios y sesión, con opciones por defecto.
-                .formLogin(Customizer.withDefaults())
+                //.formLogin(Customizer.withDefaults())
+                // Activar la autenticación con formularios y sesión pero personalizando.
+                .formLogin(form -> form
+                        .loginPage("/login").permitAll()
+                        .successHandler(securityMonitor)
+                        .failureHandler(securityMonitor))
                 // Desactivar esquema HTTP basic, porque se usa Forms Authentication.
                 .httpBasic(AbstractHttpConfigurer::disable);
 

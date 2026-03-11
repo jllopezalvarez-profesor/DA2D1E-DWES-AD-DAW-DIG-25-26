@@ -135,3 +135,18 @@ VALUES
 (17, 'DAW-EIE'),
 
 (18, 'DAW-LM');
+
+insert into roles(rol_id, rol_name)
+values ('USER', 'Usuario estándar'),
+       ('ADMIN', 'Administrador');
+
+insert into users (email, password, first_name, last_name, birth_date, registered_at)
+values ('admin@school.net', '$2a$12$o4ZC0LV6g0f8WeyqPMW9hu93OQcAYIYLdeQ7DtXJ7vEJnQmW.ZdQq', 'José Luis',
+        'López Álvarez', '1972-08-13', current_timestamp()),
+       ('user@school.net', '$2a$12$hXkKNeCPbxlmRKGqhNXRfuHXb3sraGJuSwiPaZBS4AtvtWBuP7AZ2', 'Usuario', 'Normal no admin',
+        '2001-03-09', current_timestamp());
+
+insert into users_roles (user_id, rol_id)
+values (1, 'USER'),
+       (1, 'ADMIN'),
+       (2, 'USER');
