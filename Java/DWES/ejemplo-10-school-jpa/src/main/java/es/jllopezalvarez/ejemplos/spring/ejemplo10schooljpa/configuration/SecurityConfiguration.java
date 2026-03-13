@@ -1,5 +1,6 @@
 package es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.configuration;
 
+import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.security.AlternativeSuccessHandler;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.security.SecurityMonitor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +22,7 @@ public class SecurityConfiguration {
     private int hashCostFactor;
 
     @Bean
-    public SecurityFilterChain getSecurityFilterChain(HttpSecurity http, SecurityMonitor securityMonitor) throws Exception {
+    public SecurityFilterChain getSecurityFilterChain(HttpSecurity http, SecurityMonitor securityMonitor, AlternativeSuccessHandler alternativeSuccessHandler) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
                         // Autorizar el acceso a la consola H2 para cualquier usuario
@@ -42,7 +43,8 @@ public class SecurityConfiguration {
                 // Activar la autenticación con formularios y sesión pero personalizando.
                 .formLogin(form -> form
                         .loginPage("/login").permitAll()
-                        .successHandler(securityMonitor)
+//                        .successHandler(securityMonitor)
+                        .successHandler(alternativeSuccessHandler)
                         .failureHandler(securityMonitor))
                 // Desactivar esquema HTTP basic, porque se usa Forms Authentication.
                 .httpBasic(AbstractHttpConfigurer::disable);
