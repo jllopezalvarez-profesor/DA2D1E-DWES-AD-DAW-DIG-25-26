@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>es.jllopezalvarez.ejemplos.ejemplo20issuetracker</groupId>
+        <artifactId>ejemplo20issuetracker-parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>security</artifactId>
+    <name>Ejemplo 20 - Issue tracker - Security</name>
+    <description>
+        Módulo con elementos comunes de seguridad del ejemplo 20:
+        Sistema de gestión de incidencias en proyectos
+    </description>
+
+    <dependencies>
+        <dependency>
+            <groupId>es.jllopezalvarez.ejemplos.ejemplo20issuetracker</groupId>
+            <artifactId>common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

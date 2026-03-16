@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- Coordenadas Maven y versión del módulo "padre" del proyecto -->
+    <groupId>es.jllopezalvarez.ejemplos.ejemplo20issuetracker</groupId>
+    <artifactId>ejemplo20issuetracker-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>Ejemplo 20 - Issue tracker - Padre</name>
+    <description>Módulo padre del ejemplo 20: Sistema de gestión de incidencias en proyectos</description>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>common</module>
+        <module>security</module>
+        <module>web</module>
+        <!--        <module>api</module>-->
+    </modules>
+
+    <properties>
+        <!-- Define la versión de Java que usará Maven cuando ejecute scripts (compile, package, build, ...) -->
+        <java.version>21</java.version>
+        <!-- Define la versión de Spring Boot que se usará en el proyecto,
+        para no tener que cambiar en muchos sitios si se decide cambiar versión -->
+        <spring-boot.version>4.0.3</spring-boot.version>
+    </properties>
+
+    <dependencyManagement>
+        <!-- Define qué versiones de dependencias se usarán en el resto
+        de módulos, que se configurarán como hijos de este. Ojo, no añade las
+        dependencias en sí, solo establece el catálogo de versiones que se deben usar -->
+        <dependencies>
+            <dependency>
+                <!-- Para versiones de Spring Boot. -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <!-- Versión definida previamente, centralizada  -->
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <!-- Import indica a maven que "copie" las definiciones de versiones
+                indicadas en spring-boot-dependencies dentro de este proyecto. -->
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <!-- Igual que con dependencyManagement, esto define versiones y configuración para que los
+            módulos "hijos" del proyecto no tengan que definirla / la reutilicen. -->
+            <plugins>
+
+                <plugin>
+                    <!-- Configuración del plugin de Spring Boot. Se encarga de convertir la aplicación en
+                    JAR ejecutable al hacer "package", reorganizar su contenido para el formato adecuado,
+                    y permite ejecutar directamente la aplicación -->
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                </plugin>
+
+                <plugin>
+                    <!-- Configuración del plugin de Maven, que se encarga de lanzar el procesamiento del
+                    proyecto completo cuando se lanza desde maven (ej. mvn compile o mvn package en Linux, o las
+                    herramientas de Maven en IntelliJ).  -->
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <!-- Antes se encontraban dos elementos, "source" y "target".
+                        Ahora estos dos se "juntan" en un único elemento de configuración,
+                        donde se usa la versión de Java indicada previamente -->
+                        <release>${java.version}</release>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>
