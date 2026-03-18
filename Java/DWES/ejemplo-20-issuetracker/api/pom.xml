@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <!-- Módulo padre - El hijo hereda cosas del padre, como version y groupId -->
     <parent>
         <groupId>es.jllopezalvarez.ejemplos.ejemplo20issuetracker</groupId>
         <artifactId>ejemplo20issuetracker-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
+    <!-- Propiedades Maven específicas de este módulo -->
     <artifactId>api</artifactId>
-
     <name>Ejemplo 20 - Issue tracker - API REST</name>
     <description>
         Módulo con los servicios REST del ejemplo 20:
@@ -18,7 +19,21 @@
     </description>
 
     <dependencies>
+        <!--
+        Las dependencias en este módulo no llevan versión porque se
+        usa el <dependencyManagement> en el módulo padre para definir
+        las versiones adecuadas. Así la versión será la misma en todos
+        los módulos hijos.
+        -->
         <dependency>
+            <!--
+            Técnicamente, esta dependencia no es necesaria.
+            Al depender de security, transitivamente se depende de common, porque
+            common no está marcado como optional en security.
+            Maven resuelve esta especie de "duplicidad" automáticamente.
+            En cualquier caso, se mantiene aquí por motivos didácticos, para dejar
+            claro que hay una dependencia de common, y no solo de security.
+            -->
             <groupId>es.jllopezalvarez.ejemplos.ejemplo20issuetracker</groupId>
             <artifactId>common</artifactId>
             <version>${project.version}</version>
@@ -30,11 +45,13 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webmvc</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
+            <!-- Se necesita para ejecutar la aplicación, pero no para compilar -->
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -43,24 +60,28 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
+            <!-- Se necesita para ejecutar, pero no para compilar -->
             <scope>runtime</scope>
-            <optional>true</optional>
         </dependency>
 
     </dependencies>
+
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <!--
+                La configuración del plugin se extrae del pom del padre.
+                Ojo: si se escribe aquí configuración puede anular la
+                configuración definida en el módulo padre.
+                -->
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <parameters>true</parameters>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
+
 </project>

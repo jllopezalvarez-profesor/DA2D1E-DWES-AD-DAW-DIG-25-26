@@ -2,6 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <!-- Coordenadas Maven y versión del módulo "padre" del proyecto -->
     <groupId>es.jllopezalvarez.ejemplos.ejemplo20issuetracker</groupId>
     <artifactId>ejemplo20issuetracker-parent</artifactId>
@@ -10,6 +11,7 @@
     <description>Módulo padre del ejemplo 20: Sistema de gestión de incidencias en proyectos</description>
     <packaging>pom</packaging>
 
+    <!-- Módulos hijos -->
     <modules>
         <module>common</module>
         <module>security</module>
@@ -17,59 +19,143 @@
         <module>api</module>
     </modules>
 
+    <!-- Propiedades y versiones que se usarán en el proyecto -->
     <properties>
-        <!-- Define la versión de Java que usará Maven cuando ejecute scripts (compile, package, build, ...) -->
+        <!-- Versión de Java -->
         <java.version>21</java.version>
-        <!-- Define la versión de Spring Boot que se usará en el proyecto,
-        para no tener que cambiar en muchos sitios si se decide cambiar versión -->
+        <!-- Versión de Spring Boot -->
         <spring-boot.version>4.0.3</spring-boot.version>
+        <!-- Versión de Lombok -->
+        <lombok.version>1.18.44</lombok.version>
+        <!-- Versión de la dependencia que coordina "Lombok" y "MapStruct" -->
+        <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
+        <!-- Versión de MapStruct -->
+        <mapstruct.version>1.6.3</mapstruct.version>
+        <!-- Versión de plugin de maven -->
+        <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
     </properties>
 
+    <!--
+    Define qué versiones de dependencias se usarán en el resto
+    de módulos, que se configurarán como hijos de este. Ojo, no añade las
+    dependencias en sí, solo establece el catálogo de versiones que se deben usar.
+    -->
     <dependencyManagement>
-        <!-- Define qué versiones de dependencias se usarán en el resto
-        de módulos, que se configurarán como hijos de este. Ojo, no añade las
-        dependencias en sí, solo establece el catálogo de versiones que se deben usar -->
         <dependencies>
             <dependency>
-                <!-- Para versiones de Spring Boot. -->
+                <!-- Spring Boot. -->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <!-- Versión definida previamente, centralizada  -->
                 <version>${spring-boot.version}</version>
                 <type>pom</type>
-                <!-- Import indica a maven que "copie" las definiciones de versiones
-                indicadas en spring-boot-dependencies dentro de este proyecto. -->
+                <!--
+                Import indica a maven que "copie" las definiciones de versiones
+                indicadas en spring-boot-dependencies dentro de este proyecto.
+                -->
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <!-- Lombok -->
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <!--
+                Mejora el comportamiento del generador de código de MapStruct, que se ejecuta en
+                el plugin de Maven, cuando se está usando también Lombok. En este escenario parte
+                del código generado por MapStruct depende de código generado por Lombok
+                (Builder, Getter, Setter, ...), y esta dependencia ayuda a que la generación de
+                código se haga en el orden adecuado.
+                -->
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok-mapstruct-binding</artifactId>
+                <version>${lombok-mapstruct-binding.version}</version>
+            </dependency>
+            <dependency>
+                <!--
+                MapStruct - No es el procesador de anotaciones - Necesaria para compilar los mappers,
+                pero también para ejecutarlos, porque es donde están anotaciones como @Mapper y @Mapping.
+                -->
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <!--
+                Procesador de anotaciones de MapStruct, que se usa en el plugin de Maven.
+                Se encarga de generar el código necesario para implementar las interfaces anotadas con @Mapper.
+                -->
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
     <build>
+        <!--
+        Define qué versiones de plugins de Maven se usarán en el resto de módulos, que se configurarán
+        como hijos de este. Es lo mismo que <dependencyManagement>, pero para plugins. En este caso,
+        tampoco añade los plugins en sí mismos, solo es configuración de versiones.
+        -->
         <pluginManagement>
-            <!-- Igual que con dependencyManagement, esto define versiones y configuración para que los
-            módulos "hijos" del proyecto no tengan que definirla / la reutilicen. -->
             <plugins>
-
+                <plugin>
+                    <!--
+                    Configuración del plugin de Maven para compilación de módulos
+                    -->
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <!--
+                    Ojo, algunas cosas de esta configuración pueden sobrescribirse
+                    o perderse si se crea una nueva configuración en el módulo hijo.
+                    -->
+                    <configuration>
+                        <!--
+                        Versión de Java.
+                        Antes se encontraban dos elementos, "source" y "target".
+                        Ahora estos dos se "juntan" en un único elemento de configuración,
+                        donde se usa la versión de Java indicada previamente
+                        -->
+                        <release>${java.version}</release>
+                        <!-- Incluir información de parámetros de métodos al compilar -->
+                        <parameters>true</parameters>
+                        <!--
+                        Procesadores de anotaciones. El orden importa, porque MapStruct no debe lanzarse
+                        hasta que Lombok haya terminado de generar código.
+                        -->
+                        <annotationProcessorPaths>
+                            <path>
+                                <!-- 1 - Lombok - Getters, Setters, Builder, etc. -->
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>${lombok.version}</version>
+                            </path>
+                            <path>
+                                <!-- 2 - Permite que MapStruct vea lo que Lombok generó -->
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok-mapstruct-binding</artifactId>
+                                <version>${lombok-mapstruct-binding.version}</version>
+                            </path>
+                            <path>
+                                <!-- 3 - Genera las implementaciones de los Mappers -->
+                                <groupId>org.mapstruct</groupId>
+                                <artifactId>mapstruct-processor</artifactId>
+                                <version>${mapstruct.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
+                    </configuration>
+                </plugin>
                 <plugin>
                     <!-- Configuración del plugin de Spring Boot. Se encarga de convertir la aplicación en
                     JAR ejecutable al hacer "package", reorganizar su contenido para el formato adecuado,
                     y permite ejecutar directamente la aplicación -->
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
-                </plugin>
-
-                <plugin>
-                    <!-- Configuración del plugin de Maven, que se encarga de lanzar el procesamiento del
-                    proyecto completo cuando se lanza desde maven (ej. mvn compile o mvn package en Linux, o las
-                    herramientas de Maven en IntelliJ).  -->
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <configuration>
-                        <!-- Antes se encontraban dos elementos, "source" y "target".
-                        Ahora estos dos se "juntan" en un único elemento de configuración,
-                        donde se usa la versión de Java indicada previamente -->
-                        <release>${java.version}</release>
-                    </configuration>
+                    <version>${spring-boot.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
