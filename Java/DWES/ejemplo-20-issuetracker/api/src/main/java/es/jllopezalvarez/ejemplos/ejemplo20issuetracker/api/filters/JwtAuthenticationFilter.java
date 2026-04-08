@@ -21,6 +21,9 @@ import java.io.IOException;
 @NullMarked
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
+    private static final String AUTH_HEADER = "Authorization";
+    private static final String AUTH_PREFIX = "Bearer ";
+
     private final JwtServiceImpl jwtService;
     private final UserDetailsService userDetailsService;
 
@@ -40,37 +43,42 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        final String authHeader = request.getHeader("Authorization");
 
-        // 2. Validación rápida del header
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+        // 2. Extraer y comprobar si la cabecera es para JWT
+        final String authHeader = request.getHeader(AUTH_HEADER);
+        if (authHeader == null || !authHeader.startsWith(AUTH_PREFIX)) {
             filterChain.doFilter(request, response);
             return;
         }
 
-        final String jwt = authHeader.substring(7);
-        final String username = jwtService.extractUsername(jwt);
+        // 3. Obtener el token de la cabecera
+        final String jwt = authHeader.substring(AUTH_PREFIX.length());
 
-        // 3. Si el nombre de usuario no llega, salir
-        if (username == null || username.isBlank()) {
-            filterChain.doFilter(request, response);
-            return;
+        try {
+            final String username = jwtService.extractUsername(jwt);
+
+            // 4. Si el nombre de usuario no llega, salir
+            if (username == null || username.isBlank()) {
+                filterChain.doFilter(request, response);
+                return;
+            }
+
+            // 5. Buscar el usuario - Esto lanza excepción UsernameNotFoundException si no existe el usuario
+            UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
+
+            // 5. Verificar si el token ha caducado
+            if (!jwtService.isTokenExpired(jwt)) {
+                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                        userDetails,
+                        null,
+                        userDetails.getAuthorities()
+                );
+                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authToken);
+            }
+        } catch (Exception ex) {
+
         }
-
-        // 4. Buscar el usuario - Esto lanza excepción UsernameNotFoundException si no existe el usuario
-        UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-
-        // 5. Verificar si el token ha caducado
-        if (!jwtService.isTokenExpired(jwt)) {
-            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                    userDetails,
-                    null,
-                    userDetails.getAuthorities()
-            );
-            authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-            SecurityContextHolder.getContext().setAuthentication(authToken);
-        }
-
         filterChain.doFilter(request, response);
     }
 

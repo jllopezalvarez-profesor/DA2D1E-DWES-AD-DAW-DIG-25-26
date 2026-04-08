@@ -23,7 +23,12 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers("/api/v1/auth/**",
+                                "/v3/api-docs/**",
+                                "/v3/swagger-config/**",
+                                "/swagger-ui/**",
+                                "/api/v1/tests/**").permitAll()
+
                         .anyRequest().authenticated());
 
         return http.build();

@@ -37,6 +37,9 @@ public class ProjectController {
         // si no se compila con el modificador "-parameters", que se puede configurar en el
         // plugin de Maven. Sin ese modificador, en el bytecode no se incluye el nombre del
         // parámetro obtenido automáticamente, y hay que indicarlo de forma específica.
+
+
+
         Optional<Project> optionalProject = projectService.findById(id);
         if (optionalProject.isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -51,5 +54,12 @@ public class ProjectController {
 //                .description(project.getDescription())
 //                .build();
 //    }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") Long projectId){
+        projectService.delete(projectId);
+        return ResponseEntity.ok().build();
+    }
 
 }
