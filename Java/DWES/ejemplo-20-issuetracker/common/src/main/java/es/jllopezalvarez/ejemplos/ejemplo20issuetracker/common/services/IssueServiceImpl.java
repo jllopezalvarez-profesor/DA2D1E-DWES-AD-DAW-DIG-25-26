@@ -2,13 +2,15 @@ package es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.services;
 
 import es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.entities.Issue;
 import es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.repositories.IssueRepository;
+import es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.saxhandlers.IssuesImportSaxHandler;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.*;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 @Service
@@ -46,6 +48,24 @@ public class IssueServiceImpl implements IssueService {
 
 
         return document;
+    }
+
+    @Override
+    public void importIssues(InputStream issuesStream) throws ParserConfigurationException, SAXException, IOException {
+        SAXParserFactory factory = SAXParserFactory.newInstance();
+        SAXParser parser = factory.newSAXParser();
+
+        IssuesImportSaxHandler handler = new IssuesImportSaxHandler();
+
+        parser.parse(issuesStream, handler);
+
+        System.out.printf("Se han encontrado %d issues en el XML\n", handler.getIssues().size());
+
+        handler.getIssues().forEach(issue -> System.out.println(issue.getTitle()));
+
+        // issueRepository.saveAll(handler.getIssues());
+
+
     }
 
     private void exportIssues(List<Issue> issues, Document document) {

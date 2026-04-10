@@ -4,12 +4,10 @@ import es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.dto.api.ProjectDt
 import es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.entities.Project;
 import es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.mappers.ProjectMapper;
 import es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.services.ProjectService;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -25,10 +23,15 @@ public class ProjectController {
     }
 
     @GetMapping
-    ResponseEntity<List<ProjectDto>> findAll() {
+    ResponseEntity<Page<ProjectDto>> findAll(
+            @RequestParam(value = "p", defaultValue = "0") int pageNumber,
+            @RequestParam(value = "ps", defaultValue = "1")  int pageSize) {
 //        return ResponseEntity.notFound().build();
 //        return ResponseEntity.status(HttpStatus.CONFLICT).build();
-        return ResponseEntity.ok(projectService.findAll().stream().map(projectMapper::map).toList());
+
+        Page<Project> projectsPage = projectService.findAll(pageNumber, pageSize);
+
+        return ResponseEntity.ok(projectsPage.map(projectMapper::map));
     }
 
     @GetMapping("/{id}")
@@ -37,7 +40,6 @@ public class ProjectController {
         // si no se compila con el modificador "-parameters", que se puede configurar en el
         // plugin de Maven. Sin ese modificador, en el bytecode no se incluye el nombre del
         // parámetro obtenido automáticamente, y hay que indicarlo de forma específica.
-
 
 
         Optional<Project> optionalProject = projectService.findById(id);
@@ -57,7 +59,7 @@ public class ProjectController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") Long projectId){
+    public ResponseEntity<Void> delete(@PathVariable("id") Long projectId) {
         projectService.delete(projectId);
         return ResponseEntity.ok().build();
     }

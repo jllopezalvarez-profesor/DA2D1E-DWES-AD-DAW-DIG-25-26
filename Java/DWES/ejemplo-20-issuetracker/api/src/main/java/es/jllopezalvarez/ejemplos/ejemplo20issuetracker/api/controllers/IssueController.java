@@ -4,10 +4,10 @@ import es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.services.IssueSer
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
@@ -54,8 +54,25 @@ public class IssueController {
                     .body(writer.toString());
 
         }
+    }
 
+    @PostMapping("/import")
+    public ResponseEntity<String> importFile(@RequestParam("file") MultipartFile multipartFile) throws IOException, ParserConfigurationException, SAXException {
+        if (multipartFile.isEmpty())
+        {
+            return ResponseEntity.badRequest().body("El fichero no se ha recibido");
+        }
+        if (multipartFile.getSize() == 0)
+        {
+            return ResponseEntity.badRequest().body("El fichero recibido está vacío");
+        }
 
+        System.out.printf("Tamaño del fichero recibido: %s\n", multipartFile.getSize());
+        System.out.printf("Nombre original del fichero recibido: %s\n", multipartFile.getOriginalFilename());
+
+        issueService.importIssues(multipartFile.getInputStream());
+
+        return ResponseEntity.ok("Fichero recibido correctamente");
     }
 
 }
