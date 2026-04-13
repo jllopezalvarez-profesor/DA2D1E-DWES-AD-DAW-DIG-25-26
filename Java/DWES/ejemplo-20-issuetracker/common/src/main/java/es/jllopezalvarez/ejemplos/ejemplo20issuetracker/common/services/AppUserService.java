@@ -7,5 +7,6 @@ import es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.entities.AppUser;
 import java.util.Optional;
 
 public interface AppUserService {
-    public Optional<AppUser> findUserByEmail(String email);
+    public Optional<AppUser> findByEmail(String email);
+    public Optional<AppUser> findById(Long id);
 }

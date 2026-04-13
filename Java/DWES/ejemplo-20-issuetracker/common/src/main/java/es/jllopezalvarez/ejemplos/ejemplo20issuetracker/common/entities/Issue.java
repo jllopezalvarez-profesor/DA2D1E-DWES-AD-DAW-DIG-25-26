@@ -44,17 +44,14 @@ public class Issue {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "project_id", nullable = false)
-    @Setter(AccessLevel.PACKAGE)
     private Project project;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "reporter_id", nullable = false)
-    @Setter(AccessLevel.PACKAGE)
     private AppUser reporter;
 
     @ManyToOne
     @JoinColumn(name = "assignee_id")
-    @Setter(AccessLevel.PACKAGE)
     private AppUser assignee;
 
     // region Relación para comentarios (Issue <--> Comment)

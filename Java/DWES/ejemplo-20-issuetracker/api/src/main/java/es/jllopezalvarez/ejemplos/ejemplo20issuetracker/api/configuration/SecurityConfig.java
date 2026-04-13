@@ -28,8 +28,7 @@ public class SecurityConfig {
                                 "/v3/swagger-config/**",
                                 "/swagger-ui/**",
                                 "/api/v1/tests/**",
-                                "/api/v1/issues/export",
-                                "/api/v1/issues/import").permitAll()
+                                "/api/v1/issues/**").permitAll()
 
                         .anyRequest().authenticated());
 
@@ -37,13 +36,9 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager getAuthenticationManager(AuthenticationConfiguration authConfig){
+    public AuthenticationManager getAuthenticationManager(AuthenticationConfiguration authConfig) {
         return authConfig.getAuthenticationManager();
     }
-
-
-
-
 
 
 }
