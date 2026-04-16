@@ -10,6 +10,7 @@ import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.services.DepartmentS
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.services.StudentService;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.services.TeacherService;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import org.apache.tomcat.util.modeler.BaseAttributeFilter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -17,6 +18,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -58,14 +60,19 @@ public class TeacherController {
     }
 
     @PostMapping("/new")
-    public String newTeacherPost(@ModelAttribute("teacher") NewTeacherModel newTeacherModel, Model model) {
+    public String newTeacherPost(
+            @Valid @ModelAttribute("teacher") NewTeacherModel newTeacherModel,
+            BindingResult bindingResult,
+            Model model) {
 
-        try {
-            teacherService.createNew(newTeacherModel);
-        } catch (Exception e) {
-            model.addAttribute("error", String.format("Se ha producido un error: %s", e.getMessage()));
+        if (bindingResult.hasErrors()) {
+            // throw new RuntimeException("Se han detectado errores en bindingResult");
             return "teachers/new";
         }
+
+
+        teacherService.createNew(newTeacherModel);
+
 
         return "redirect:/teachers";
     }
@@ -105,8 +112,6 @@ public class TeacherController {
     public List<Department> getAllDepartments() {
         return departmentService.findAll();
     }
-
-
 
 
 }

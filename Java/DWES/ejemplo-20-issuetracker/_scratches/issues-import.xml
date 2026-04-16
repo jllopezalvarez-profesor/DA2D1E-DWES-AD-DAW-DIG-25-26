@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<issues>
+    <issue assigneeId="2" createdAt="2026-04-13T01:37:02.700158" issueId="1" projectId="1" reporterId="1" status="OPEN"
+           updatedAt="2026-04-13T01:37:02.700158">
+        <title>Error login</title>
+        <description>Usuarios reciben error 500 al iniciar sesión.</description>
+    </issue>
+    <issue assigneeId="3" createdAt="2026-04-13T01:37:02.700158" issueId="2" projectId="1" reporterId="2"
+           status="IN_PROGRESS" updatedAt="2026-04-13T01:37:02.700158">
+        <title>Página de perfil lenta</title>
+        <description>Optimizar carga de perfil y foto de usuario.</description>
+    </issue>
+    <issue createdAt="2026-04-13T01:37:02.700158" issueId="3" projectId="1" reporterId="3" status="OPEN"
+           updatedAt="2026-04-13T01:37:02.700158">
+        <title>Notificaciones no llegan</title>
+        <description>Algunos emails de notificación no se envían.</description>
+    </issue>
+    <issue assigneeId="1" createdAt="2026-04-13T01:37:02.700158" issueId="4" projectId="1" reporterId="1"
+           status="RESOLVED" updatedAt="2026-04-13T01:37:02.700158">
+        <title>Errores en el dashboard</title>
+        <description>Widgets del dashboard muestran datos desactualizados.</description>
+    </issue>
+    <issue assigneeId="2" createdAt="2026-04-13T01:37:02.700158" issueId="5" projectId="1" reporterId="2"
+           status="CLOSED" updatedAt="2026-04-13T01:37:02.700158">
+        <title>Filtros de búsqueda fallan</title>
+        <description>Filtros no aplican correctamente en búsqueda de incidencias.</description>
+    </issue>
+    <issue assigneeId="3" createdAt="2026-04-13T01:37:02.700158" issueId="6" projectId="2" reporterId="1" status="OPEN"
+           updatedAt="2026-04-13T01:37:02.700158">
+        <title>Bug registro clientes</title>
+        <description>Campo teléfono permite caracteres inválidos.</description>
+    </issue>
+    <issue createdAt="2026-04-13T01:37:02.700158" issueId="7" projectId="2" reporterId="2" status="OPEN"
+           updatedAt="2026-04-13T01:37:02.700158">
+        <title>Imagen de perfil no carga</title>
+        <description>Al subir imagen, la app devuelve error.</description>
+    </issue>
+    <issue assigneeId="1" createdAt="2026-04-13T01:37:02.700158" issueId="8" projectId="2" reporterId="3"
+           status="IN_PROGRESS" updatedAt="2026-04-13T01:37:02.700158">
+        <title>Error al generar PDF</title>
+        <description>El PDF de facturas no se genera correctamente.</description>
+    </issue>
+    <issue assigneeId="2" createdAt="2026-04-13T01:37:02.700158" issueId="9" projectId="2" reporterId="1" status="OPEN"
+           updatedAt="2026-04-13T01:37:02.700158">
+        <title>Página de login se cuelga</title>
+        <description>Después de 5 intentos fallidos, la página no responde.</description>
+    </issue>
+    <issue assigneeId="3" createdAt="2026-04-13T01:37:02.700158" issueId="10" projectId="2" reporterId="2"
+           status="RESOLVED" updatedAt="2026-04-13T01:37:02.700158">
+        <title>Botón de ayuda no funciona</title>
+        <description>El botón de ayuda no abre el modal correspondiente.</description>
+    </issue>
+    <issue createdAt="2026-04-13T01:37:02.700158" issueId="11" projectId="3" reporterId="1" status="OPEN"
+           updatedAt="2026-04-13T01:37:02.700158">
+        <title>Crash app Android</title>
+        <description>La app móvil se cierra al abrir notificaciones.</description>
+    </issue>
+    <issue assigneeId="1" createdAt="2026-04-13T01:37:02.700158" issueId="12" projectId="3" reporterId="2"
+           status="IN_PROGRESS" updatedAt="2026-04-13T01:37:02.700158">
+        <title>Error iOS al abrir perfil</title>
+        <description>Al abrir perfil en iPhone, se queda cargando indefinidamente.</description>
+    </issue>
+    <issue assigneeId="2" createdAt="2026-04-13T01:37:02.700158" issueId="13" projectId="3" reporterId="3" status="OPEN"
+           updatedAt="2026-04-13T01:37:02.700158">
+        <title>Notificaciones push duplicadas</title>
+        <description>Usuarios reciben varias notificaciones por el mismo evento.</description>
+    </issue>
+    <issue assigneeId="3" createdAt="2026-04-13T01:37:02.700158" issueId="14" projectId="3" reporterId="1"
+           status="CLOSED" updatedAt="2026-04-13T01:37:02.700158">
+        <title>Problema en sincronización</title>
+        <description>Los datos de tareas no se sincronizan entre app y web.</description>
+    </issue>
+    <issue createdAt="2026-04-13T01:37:02.700158" issueId="15" projectId="3" reporterId="2" status="OPEN"
+           updatedAt="2026-04-13T01:37:02.700158">
+        <title>Crash al abrir chat</title>
+        <description>Al abrir chat dentro de la app, se cierra.</description>
+    </issue>
+    <issue assigneeId="1" createdAt="2026-04-13T01:37:02.700158" issueId="16" projectId="4" reporterId="3"
+           status="IN_PROGRESS" updatedAt="2026-04-13T01:37:02.700158">
+        <title>ERP no actualiza pedidos</title>
+        <description>Al sincronizar pedidos con ERP, algunos registros se duplican.</description>
+    </issue>
+    <issue assigneeId="2" createdAt="2026-04-13T01:37:02.700158" issueId="17" projectId="4" reporterId="1"
+           status="RESOLVED" updatedAt="2026-04-13T01:37:02.700158">
+        <title>Informe contable incorrecto</title>
+        <description>Al generar informe, los totales no coinciden.</description>
+    </issue>
+    <issue createdAt="2026-04-13T01:37:02.700158" issueId="18" projectId="4" reporterId="2" status="OPEN"
+           updatedAt="2026-04-13T01:37:02.700158">
+        <title>Error permisos de usuario</title>
+        <description>Usuarios normales pueden acceder a opciones de admin.</description>
+    </issue>
+    <issue assigneeId="3" createdAt="2026-04-13T01:37:02.700158" issueId="19" projectId="4" reporterId="3"
+           status="IN_PROGRESS" updatedAt="2026-04-13T01:37:02.700158">
+        <title>Dashboard lento</title>
+        <description>Carga del dashboard de ERP tarda más de 10s.</description>
+    </issue>
+    <issue assigneeId="1" createdAt="2026-04-13T01:37:02.700158" issueId="20" projectId="4" reporterId="1" status="OPEN"
+           updatedAt="2026-04-13T01:37:02.700158">
+        <title>Exportación CSV falla</title>
+        <description>Al exportar pedidos, el CSV no se descarga correctamente.</description>
+    </issue>
+    <issue assigneeId="2" createdAt="2026-04-13T01:37:02.700158" issueId="21" projectId="5" reporterId="2"
+           status="RESOLVED" updatedAt="2026-04-13T01:37:02.700158">
+        <title>Informe ventas incompleto</title>
+        <description>No muestra todas las transacciones.</description>
+    </issue>
+    <issue createdAt="2026-04-13T01:37:02.700158" issueId="22" projectId="5" reporterId="3" status="OPEN"
+           updatedAt="2026-04-13T01:37:02.700158">
+        <title>Error gráficos</title>
+        <description>Gráficos de ventas muestran datos incorrectos.</description>
+    </issue>
+    <issue assigneeId="3" createdAt="2026-04-13T01:37:02.700158" issueId="23" projectId="5" reporterId="1" status="OPEN"
+           updatedAt="2026-04-13T01:37:02.700158">
+        <title>Reporte de clientes vacío</title>
+        <description>Al generar reporte de clientes, aparece en blanco.</description>
+    </issue>
+    <issue assigneeId="1" createdAt="2026-04-13T01:37:02.700158" issueId="24" projectId="5" reporterId="2"
+           status="IN_PROGRESS" updatedAt="2026-04-13T01:37:02.700158">
+        <title>Problema filtros dashboard</title>
+        <description>Filtros de fecha no funcionan correctamente.</description>
+    </issue>
+    <issue assigneeId="2" createdAt="2026-04-13T01:37:02.700158" issueId="25" projectId="5" reporterId="3"
+           status="CLOSED" updatedAt="2026-04-13T01:37:02.700158">
+        <title>Datos duplicados en exportación</title>
+        <description>Exportación de datos contiene registros duplicados.</description>
+    </issue>
+    <issue createdAt="2026-04-13T01:37:02.700158" issueId="26" projectId="1" reporterId="1" status="OPEN"
+           updatedAt="2026-04-13T01:37:02.700158">
+        <title>Error en paginación</title>
+        <description>Los resultados de búsqueda no se muestran correctamente al pasar de la página 5 en adelante.
+        </description>
+    </issue>
+    <issue assigneeId="3" createdAt="2026-04-13T01:37:02.700158" issueId="27" projectId="1" reporterId="2"
+           status="IN_PROGRESS" updatedAt="2026-04-13T01:37:02.700158">
+        <title>Campo obligatorio no validado</title>
+        <description>El formulario permite enviar sin completar campos obligatorios.</description>
+    </issue>
+    <issue assigneeId="2" createdAt="2026-04-13T01:37:02.700158" issueId="28" projectId="1" reporterId="3" status="OPEN"
+           updatedAt="2026-04-13T01:37:02.700158">
+        <title>Iconos faltantes en menú</title>
+        <description>Al cargar el menú principal, algunos iconos no se muestran.</description>
+    </issue>
+    <issue assigneeId="1" createdAt="2026-04-13T01:37:02.700158" issueId="29" projectId="1" reporterId="1"
+           status="RESOLVED" updatedAt="2026-04-13T01:37:02.700158">
+        <title>Error en exportación PDF</title>
+        <description>Al exportar reportes, algunos textos aparecen cortados.</description>
+    </issue>
+    <issue createdAt="2026-04-13T01:37:02.700158" issueId="30" projectId="1" reporterId="2" status="OPEN"
+           updatedAt="2026-04-13T01:37:02.700158">
+        <title>Problema de compatibilidad navegador</title>
+        <description>La web no funciona correctamente en Safari.</description>
+    </issue>
+    <issue assigneeId="3" createdAt="2026-04-13T01:37:02.700158" issueId="31" projectId="2" reporterId="3" status="OPEN"
+           updatedAt="2026-04-13T01:37:02.700158">
+        <title>Validación de email incorrecta</title>
+        <description>Se permiten emails sin dominio válido al registrar clientes.</description>
+    </issue>
+    <issue assigneeId="1" createdAt="2026-04-13T01:37:02.700158" issueId="32" projectId="2" reporterId="1"
+           status="IN_PROGRESS" updatedAt="2026-04-13T01:37:02.700158">
+        <title>Carga de imagen lenta</title>
+        <description>Subir imágenes tarda demasiado y a veces falla.</description>
+    </issue>
+    <issue assigneeId="2" createdAt="2026-04-13T01:37:02.700158" issueId="33" projectId="2" reporterId="2" status="OPEN"
+           updatedAt="2026-04-13T01:37:02.700158">
+        <title>Error al resetear contraseña</title>
+        <description>El enlace de recuperación de contraseña devuelve error 404.</description>
+    </issue>
+    <issue createdAt="2026-04-13T01:37:02.700158" issueId="34" projectId="2" reporterId="3" status="OPEN"
+           updatedAt="2026-04-13T01:37:02.700158">
+        <title>Problema con roles de usuario</title>
+        <description>Usuarios con rol MANAGER no pueden asignar incidencias correctamente.</description>
+    </issue>
+    <issue assigneeId="3" createdAt="2026-04-13T01:37:02.700158" issueId="35" projectId="2" reporterId="1"
+           status="RESOLVED" updatedAt="2026-04-13T01:37:02.700158">
+        <title>Texto truncado en la app</title>
+        <description>Mensajes largos en la app móvil se cortan en la pantalla.</description>
+    </issue>
+    <issue assigneeId="1" createdAt="2026-04-13T01:37:02.700158" issueId="36" projectId="3" reporterId="2"
+           status="CLOSED" updatedAt="2026-04-13T01:37:02.700158">
+        <title>Notificaciones repetidas</title>
+        <description>Usuarios reciben varias veces la misma notificación push.</description>
+    </issue>
+    <issue assigneeId="2" createdAt="2026-04-13T01:37:02.700158" issueId="37" projectId="3" reporterId="3" status="OPEN"
+           updatedAt="2026-04-13T01:37:02.700158">
+        <title>Crash al cambiar idioma</title>
+        <description>Cambiar idioma en la app provoca cierre inesperado.</description>
+    </issue>
+    <issue createdAt="2026-04-13T01:37:02.700158" issueId="38" projectId="3" reporterId="1" status="OPEN"
+           updatedAt="2026-04-13T01:37:02.700158">
+        <title>Errores al sincronizar tareas</title>
+        <description>Las tareas creadas en web no aparecen en la app móvil.</description>
+    </issue>
+    <issue assigneeId="3" createdAt="2026-04-13T01:37:02.700158" issueId="39" projectId="3" reporterId="2"
+           status="IN_PROGRESS" updatedAt="2026-04-13T01:37:02.700158">
+        <title>Problema al filtrar eventos</title>
+        <description>Filtros de fechas no funcionan en la sección de eventos.</description>
+    </issue>
+    <issue assigneeId="1" createdAt="2026-04-13T01:37:02.700158" issueId="40" projectId="3" reporterId="3" status="OPEN"
+           updatedAt="2026-04-13T01:37:02.700158">
+        <title>App lenta en inicio</title>
+        <description>La aplicación tarda más de 15 segundos en arrancar.</description>
+    </issue>
+    <issue assigneeId="2" createdAt="2026-04-13T01:37:02.700158" issueId="41" projectId="4" reporterId="1"
+           status="RESOLVED" updatedAt="2026-04-13T01:37:02.700158">
+        <title>Errores al actualizar clientes</title>
+        <description>Actualización de datos de clientes no se refleja en ERP.</description>
+    </issue>
+    <issue createdAt="2026-04-13T01:37:02.700158" issueId="42" projectId="4" reporterId="2" status="OPEN"
+           updatedAt="2026-04-13T01:37:02.700158">
+        <title>Problema de permisos en ERP</title>
+        <description>Usuarios estándar pueden editar campos restringidos.</description>
+    </issue>
+    <issue assigneeId="3" createdAt="2026-04-13T01:37:02.700158" issueId="43" projectId="4" reporterId="3"
+           status="IN_PROGRESS" updatedAt="2026-04-13T01:37:02.700158">
+        <title>Exportación Excel fallida</title>
+        <description>Al exportar datos a Excel, el archivo se corrompe.</description>
+    </issue>
+    <issue assigneeId="1" createdAt="2026-04-13T01:37:02.700158" issueId="44" projectId="4" reporterId="1"
+           status="CLOSED" updatedAt="2026-04-13T01:37:02.700158">
+        <title>Errores de log</title>
+        <description>Algunos logs del sistema muestran entradas duplicadas.</description>
+    </issue>
+    <issue assigneeId="2" createdAt="2026-04-13T01:37:02.700158" issueId="45" projectId="4" reporterId="2" status="OPEN"
+           updatedAt="2026-04-13T01:37:02.700158">
+        <title>Dashboard con datos desactualizados</title>
+        <description>Widgets muestran información de hace 24h en lugar de actual.</description>
+    </issue>
+    <issue createdAt="2026-04-13T01:37:02.700158" issueId="46" projectId="5" reporterId="3" status="OPEN"
+           updatedAt="2026-04-13T01:37:02.700158">
+        <title>Gráficos inconsistentes</title>
+        <description>Los gráficos muestran valores distintos a los reportes numéricos.</description>
+    </issue>
+    <issue assigneeId="3" createdAt="2026-04-13T01:37:02.700158" issueId="47" projectId="5" reporterId="1"
+           status="IN_PROGRESS" updatedAt="2026-04-13T01:37:02.700158">
+        <title>Reporte ventas filtra mal</title>
+        <description>Al filtrar por mes, algunos registros no aparecen.</description>
+    </issue>
+    <issue assigneeId="1" createdAt="2026-04-13T01:37:02.700158" issueId="48" projectId="5" reporterId="2" status="OPEN"
+           updatedAt="2026-04-13T01:37:02.700158">
+        <title>Problema al exportar CSV</title>
+        <description>Exportación de ventas no incluye todos los campos.</description>
+    </issue>
+    <issue assigneeId="2" createdAt="2026-04-13T01:37:02.700158" issueId="49" projectId="5" reporterId="3"
+           status="RESOLVED" updatedAt="2026-04-13T01:37:02.700158">
+        <title>Alertas de stock no funcionan</title>
+        <description>No se envían alertas cuando el stock baja de 10 unidades.</description>
+    </issue>
+    <issue createdAt="2026-04-13T01:37:02.700158" issueId="50" projectId="5" reporterId="1" status="OPEN"
+           updatedAt="2026-04-13T01:37:02.700158">
+        <title>Errores en notificaciones de clientes</title>
+        <description>Algunos clientes no reciben notificaciones de eventos importantes.</description>
+    </issue>
+</issues>

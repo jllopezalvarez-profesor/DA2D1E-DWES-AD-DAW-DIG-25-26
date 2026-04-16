@@ -1,0 +1,97 @@
+###
+POST {{baseUrl}}/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin@issues.net",
+  "password": "password"
+}
+> {%
+ client.global.set("accessToken", response.body.accessToken)
+ %}
+
+<> 2026-04-13T014349.200.json
+<> 2026-04-13T013727.200.json
+<> 2026-04-09T190820.200.json
+
+
+###
+GET {{baseUrl}}/api/v1/projects?ps=3&p=1
+Authorization: Bearer {{accessToken}}
+
+<> 2026-04-09T191002.200.json
+<> 2026-04-09T190935.200.json
+<> 2026-04-09T185753.200.json
+<> 2026-04-09T185740.200.json
+
+###
+GET http://localhost:8000/api/v1/issues/export
+
+<> 2026-04-13T014427.200.xml
+<> 2026-04-13T014358.200.xml
+<> 2026-04-13T014102.200.xml
+<> 2026-04-13T014044.200.xml
+<> 2026-04-13T013924.200.xml
+<> 2026-04-13T013837.200.xml
+<> 2026-04-13T013736.200.xml
+<> 2026-04-13T010329.200.xml
+<> 2026-04-12T213110.200.xml
+<> 2026-04-10T193322.200.xml
+
+###
+GET http://localhost:8000/api/v1/issues/export-stax
+
+<> 2026-04-13T162230.200.xml
+
+###
+POST http://localhost:8000/api/v1/issues/import
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="issues-import.xml"
+
+// The 'input.txt' file will be uploaded
+< /home/jllopezalvarez/.config/JetBrains/IntelliJIdea2025.3/scratches/issues-import.xml
+--boundary
+
+<> 2026-04-13T021149.200.txt
+<> 2026-04-13T020622.200.txt
+<> 2026-04-13T020354.200.txt
+<> 2026-04-13T015944.200.txt
+<> 2026-04-13T014417.200.txt
+<> 2026-04-13T014100.200.txt
+<> 2026-04-13T013911.200.txt
+<> 2026-04-13T013901.200.txt
+<> 2026-04-13T013858.200.txt
+<> 2026-04-13T013822.200.txt
+<> 2026-04-13T013809.200.txt
+<> 2026-04-10T204029.200.txt
+<> 2026-04-10T202047.200.txt
+<> 2026-04-10T201830.200.txt
+<> 2026-04-10T201405.200.txt
+<> 2026-04-10T195417.200.txt
+<> 2026-04-10T194425.200.txt
+
+###
+POST http://localhost:8000/api/v1/issues/import-stax
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="issues-import.xml"
+
+// The 'input.txt' file will be uploaded
+< /home/jllopezalvarez/.config/JetBrains/IntelliJIdea2025.3/scratches/issues-import.xml
+--boundary
+
+<> 2026-04-13T165404.200.txt
+
+###
+GET http://localhost:8000/api/v1/issues
+
+<> 2026-04-13T165407.200.json
+<> 2026-04-13T165352.200.json
+<> 2026-04-13T021152.200.json
+<> 2026-04-13T020631.200.json
+<> 2026-04-13T015948.200.json
+<> 2026-04-13T015928.200.json
+<> 2026-04-13T015407.200.json

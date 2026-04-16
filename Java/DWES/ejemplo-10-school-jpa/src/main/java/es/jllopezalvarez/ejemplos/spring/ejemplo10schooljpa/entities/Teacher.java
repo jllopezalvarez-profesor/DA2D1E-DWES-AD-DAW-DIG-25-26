@@ -1,6 +1,8 @@
 package es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.PastOrPresent;
 import lombok.*;
 
 import java.time.LocalDate;

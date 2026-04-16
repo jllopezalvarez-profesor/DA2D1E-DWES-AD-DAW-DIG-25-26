@@ -11,8 +11,12 @@
     <h1>Nuevo profesor</h1>
     <form method="post" th:object="${teacher}" th:novalidate="${!clientValidationEnabled}">
         <div class="alert alert-danger" role="alert"
-             th:if="${error != null}" th:text="${error}">
-            A simple danger alert—check it out!
+             th:if="${#fields.hasAnyErrors()}" >
+            <p>Se han producido errores:</p>
+            <ul>
+                <li th:each="error : ${#fields.errors()}" th:text="${error}">Mensaje de error</li>
+
+            </ul>
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Correo electrónico:</label>
