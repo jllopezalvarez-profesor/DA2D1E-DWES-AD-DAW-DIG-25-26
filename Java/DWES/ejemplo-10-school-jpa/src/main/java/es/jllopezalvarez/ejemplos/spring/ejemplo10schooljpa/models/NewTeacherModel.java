@@ -1,6 +1,7 @@
 package es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.models;
 
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.entities.Department;
+import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.validation.UniqueTeacherEmail;
 import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -19,14 +20,19 @@ import java.time.LocalDate;
 @Builder
 public class NewTeacherModel {
     @NotBlank(message = "El correo electrónico no puede estar vacío")
-    @Email
+    @Email(message = "El formato del correo electrónico no es correcto")
+    @Size.List({
+            @Size(min = 10, message = "El correo electrónico debe tener ral menos tres caracteres"),
+            @Size(max = 100, message = "El correo electrónico no puede tener más de cien caracteres")
+    })
     @Length(max = 100)
+    @UniqueTeacherEmail
     private String email;
     @NotNull
-    @Length(max=100)
+    @Length(max = 100)
     private String firstName;
     @NotNull
-    @Length(max=100)
+    @Length(max = 100)
     private String lastName;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @NotNull

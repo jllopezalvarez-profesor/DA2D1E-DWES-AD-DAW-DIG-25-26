@@ -14,4 +14,6 @@ public interface TeacherService {
     Teacher createNew(NewTeacherModel newTeacherModel);
 
     Teacher update(Integer teacherId, NewTeacherModel newTeacherModel);
+
+    boolean existsByEmail(String email);
 }

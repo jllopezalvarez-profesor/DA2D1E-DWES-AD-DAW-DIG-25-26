@@ -11,7 +11,7 @@
     <h1>Nuevo profesor</h1>
     <form method="post" th:object="${teacher}" th:novalidate="${!clientValidationEnabled}">
         <div class="alert alert-danger" role="alert"
-             th:if="${#fields.hasAnyErrors()}" >
+             th:if="${#fields.hasAnyErrors()}">
             <p>Se han producido errores:</p>
             <ul>
                 <li th:each="error : ${#fields.errors()}" th:text="${error}">Mensaje de error</li>
@@ -19,8 +19,16 @@
             </ul>
         </div>
         <div class="mb-3">
+            <!--            <label for="email" class="form-label">Correo electrónico:</label>-->
+            <!--            <input type="email" class="form-control" id="email" th:field="*{email}">-->
             <label for="email" class="form-label">Correo electrónico:</label>
-            <input type="email" class="form-control" id="email" th:field="*{email}">
+            <input type="email" class="form-control" id="email"
+                   th:field="*{email}" th:errorclass="is-invalid"
+                   required>
+            <div class="invalid-feedback"
+                 th:if="${#fields.hasErrors('email')}"
+                 th:errors="*{email}">Error en email
+            </div>
         </div>
         <div class="mb-3">
             <label for="first-name" class="form-label">Nombre:</label>

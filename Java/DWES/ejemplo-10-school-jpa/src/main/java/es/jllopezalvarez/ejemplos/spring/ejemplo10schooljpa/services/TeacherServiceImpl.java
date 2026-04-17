@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 public class TeacherServiceImpl implements TeacherService {
@@ -34,6 +35,11 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public Teacher createNew(NewTeacherModel newTeacherModel) {
+
+        if ((new Random()).nextDouble() >0.1){
+            throw new RuntimeException("Error provocado");
+        }
+
         Department department = departmentRepository.findById(newTeacherModel.getDepartmentId()).orElseThrow(() -> new EntityNotFoundException(String.format("No se encuentra el departamento con ID %s", newTeacherModel.getDepartmentId())));
 
         Teacher teacher = TeacherMapper.map(newTeacherModel);
@@ -69,5 +75,10 @@ public class TeacherServiceImpl implements TeacherService {
 
         // 3 - Guardar
         return teacherRepository.save(teacher);
+    }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return teacherRepository.existsByEmail(email);
     }
 }

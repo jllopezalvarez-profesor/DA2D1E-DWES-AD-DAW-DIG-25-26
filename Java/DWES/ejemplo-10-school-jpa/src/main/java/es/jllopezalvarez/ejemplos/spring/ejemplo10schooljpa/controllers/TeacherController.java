@@ -71,8 +71,12 @@ public class TeacherController {
         }
 
 
-        teacherService.createNew(newTeacherModel);
-
+        try {
+            teacherService.createNew(newTeacherModel);
+        }
+        catch (Exception ex){
+            bindingResult.reject("ejecucion", "Error al guardar");
+        }
 
         return "redirect:/teachers";
     }
