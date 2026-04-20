@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="~{fragments/fragments :: head('Formulario multipaso - Paso 1')}">
+    <title>Formulario multipaso - Paso 1</title>
+</head>
+<body>
+<div class="container">
+    <header th:replace="~{fragments/fragments :: header}"></header>
+    <div class="container">
+        <h2>Formulario multipaso - Paso 1 - Correo electrónico</h2>
+
+        <form th:action="@{/forms/multi-step/step-one}" th:object="${dto}" method="post" novalidate>
+
+            <div class="mb-3">
+                <!-- En este campo se muestra una forma de generar los ID de los campos de forma dinámica -->
+                <!-- Esto tiene más utilidad en escenarios en los que los campos son de elementos en colecciones -->
+                <label th:for="${#fields.idFromName('email')}" class="form-label">Correo electrónico</label>
+                <input type="email"
+                       class="form-control"
+                       th:id="${#fields.idFromName('email')}"
+                       th:field="*{email}"
+                       th:errorclass="is-invalid">
+
+                <div class="invalid-feedback" th:errors="*{email}"></div>
+                <div>Las siguientes direcciones de correo se consideran repetidas en el validador:
+                    "admin@example.com",
+                    "user1@example.com",
+                    "user2@example.com",
+                    "user3@example.com".
+                </div>
+            </div>
+
+            <button class="btn btn-primary">Siguiente</button>
+        </form>
+
+    </div>
+
+</div>
+
+
+</body>
+</html>

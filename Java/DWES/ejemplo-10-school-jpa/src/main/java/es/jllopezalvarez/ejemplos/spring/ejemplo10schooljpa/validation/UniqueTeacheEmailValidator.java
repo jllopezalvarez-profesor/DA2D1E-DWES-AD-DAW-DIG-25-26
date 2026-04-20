@@ -17,8 +17,6 @@ public class UniqueTeacheEmailValidator implements ConstraintValidator<UniqueTea
     @Override
     public boolean isValid(String email, ConstraintValidatorContext constraintValidatorContext) {
         if (email.isBlank()) return true;
-
         return ! teacherService.existsByEmail(email);
-
     }
 }

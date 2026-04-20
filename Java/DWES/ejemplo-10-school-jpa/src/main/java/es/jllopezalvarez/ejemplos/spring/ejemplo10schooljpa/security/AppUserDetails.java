@@ -1,7 +1,6 @@
 package es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.security;
 
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.entities.AppUser;
-import org.antlr.v4.runtime.misc.NotNull;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;

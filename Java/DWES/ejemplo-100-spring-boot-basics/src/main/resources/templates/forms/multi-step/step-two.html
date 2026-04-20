@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="~{fragments/fragments :: head('Formulario multipaso - Paso 2')}">
+    <title>Formulario multipaso - Paso 2</title>
+</head>
+<body>
+<div class="container">
+    <header th:replace="~{fragments/fragments :: header}"></header>
+    <div class="container">
+        <h2>Formulario multipaso - Paso 2 - Datos personales</h2>
+
+        <form th:action="@{/forms/multi-step/step-two}" th:object="${dto}" method="post" novalidate>
+
+            <div class="mb-3">
+                <label for="first-name" class="form-label">Nombre</label>
+                <input type="text" id="first-name" class="form-control"
+                       th:field="*{firstName}"
+                       th:errorclass="is-invalid">
+                <div class="invalid-feedback" th:errors="*{firstName}"></div>
+            </div>
+
+            <div class="mb-3">
+                <label for="last-name" class="form-label">Apellidos</label>
+                <input type="text" id="last-name" class="form-control"
+                       th:field="*{lastName}"
+                       th:errorclass="is-invalid">
+                <div class="invalid-feedback" th:errors="*{lastName}"></div>
+            </div>
+
+            <div class="mb-3">
+                <label for="birth-date" class="form-label">Fecha de nacimiento</label>
+                <input type="date" id="birth-date" class="form-control"
+                       th:field="*{birthDate}"
+                       th:errorclass="is-invalid">
+                <div class="invalid-feedback" th:errors="*{birthDate}"></div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <a th:href="@{/forms/multi-step/step-one}" class="btn btn-secondary">Atrás</a>
+                <button class="btn btn-primary">Siguiente</button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+</body>
+</html>

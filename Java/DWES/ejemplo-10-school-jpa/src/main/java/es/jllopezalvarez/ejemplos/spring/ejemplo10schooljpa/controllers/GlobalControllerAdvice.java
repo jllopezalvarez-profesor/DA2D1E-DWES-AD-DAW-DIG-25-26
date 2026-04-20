@@ -32,7 +32,7 @@ public class GlobalControllerAdvice {
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ModelAndView handleEntityNotFoundException(Exception e){
-        ModelAndView mv = new ModelAndView("/error");
+        ModelAndView mv = new ModelAndView("error.html.old");
         mv.addObject("errorMessage", e.getMessage());
         return mv;
     }

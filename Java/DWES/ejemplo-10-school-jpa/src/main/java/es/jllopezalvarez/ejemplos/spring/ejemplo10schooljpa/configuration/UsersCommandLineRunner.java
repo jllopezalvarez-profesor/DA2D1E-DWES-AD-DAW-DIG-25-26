@@ -4,7 +4,6 @@ import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.entities.AppUser;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.services.AppUserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 

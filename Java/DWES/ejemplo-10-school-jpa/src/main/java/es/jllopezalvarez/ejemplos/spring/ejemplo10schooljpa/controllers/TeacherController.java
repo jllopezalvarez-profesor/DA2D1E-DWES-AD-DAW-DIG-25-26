@@ -1,21 +1,13 @@
 package es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.controllers;
 
-import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.dto.StudentDto;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.entities.Department;
-import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.entities.Student;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.entities.Teacher;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.mappers.TeacherMapper;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.models.NewTeacherModel;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.services.DepartmentService;
-import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.services.StudentService;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.services.TeacherService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
-import org.apache.tomcat.util.modeler.BaseAttributeFilter;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,12 +22,10 @@ public class TeacherController {
 
     private final TeacherService teacherService;
     private final DepartmentService departmentService;
-    private final StudentService studentService;
 
-    public TeacherController(TeacherService teacherService, DepartmentService departmentService, StudentService studentService) {
+    public TeacherController(TeacherService teacherService, DepartmentService departmentService) {
         this.teacherService = teacherService;
         this.departmentService = departmentService;
-        this.studentService = studentService;
     }
 
     @GetMapping({"", "/"})

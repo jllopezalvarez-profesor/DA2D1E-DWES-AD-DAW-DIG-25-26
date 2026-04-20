@@ -1,10 +1,6 @@
 package es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.models;
 
-import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.entities.Department;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.validation.UniqueTeacherEmail;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;

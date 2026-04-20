@@ -1,13 +1,9 @@
 package es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.dto;
 
-import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.entities.Module;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.entities.Student;
-import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 @Getter
 @Setter

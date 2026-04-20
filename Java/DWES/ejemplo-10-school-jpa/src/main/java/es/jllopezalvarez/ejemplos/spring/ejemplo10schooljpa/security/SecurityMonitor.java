@@ -31,7 +31,6 @@ public class SecurityMonitor implements AuthenticationSuccessHandler, Authentica
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         System.out.printf("No se ha podido autenticar el usuario. Error: %s (en handler)\n", exception.getMessage());
-
         response.sendRedirect("/login?error");
     }
 }

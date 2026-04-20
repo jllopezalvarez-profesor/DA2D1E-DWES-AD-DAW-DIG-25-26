@@ -1,19 +1,15 @@
 package es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.controllers;
 
-import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.dto.StudentDto;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.entities.Student;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.models.NewStudentModel;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.services.ModuleService;
 import es.jllopezalvarez.ejemplos.spring.ejemplo10schooljpa.services.StudentService;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
 import java.util.Random;
 
 @Controller
