@@ -1,6 +1,7 @@
 package es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.services;
 
 import es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.entities.Issue;
+import es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.entities.IssueStatus;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -22,4 +23,6 @@ public interface IssueService {
     String exportAllStax() throws XMLStreamException;
 
     void importIssuesStax(InputStream issuesStream) throws XMLStreamException;
+
+    List<Issue> search(String title, IssueStatus status);
 }

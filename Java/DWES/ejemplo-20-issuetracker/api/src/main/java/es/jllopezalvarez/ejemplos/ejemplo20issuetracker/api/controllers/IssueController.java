@@ -2,8 +2,10 @@ package es.jllopezalvarez.ejemplos.ejemplo20issuetracker.api.controllers;
 
 import es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.dto.api.IssueDto;
 import es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.entities.Issue;
+import es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.entities.IssueStatus;
 import es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.mappers.IssueMapper;
 import es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.services.IssueService;
+import org.apache.catalina.connector.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -113,6 +115,14 @@ public class IssueController {
         issueService.importIssuesStax(multipartFile.getInputStream());
 
         return ResponseEntity.ok("Fichero recibido correctamente");
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<IssueDto>> search(
+            @RequestParam(value = "t",required = false) String title,
+            @RequestParam(value = "s", required = false) IssueStatus status){
+        List<Issue> foundIssues = issueService.search(title, status);
+        return ResponseEntity.ok(issueMapper.map(foundIssues));
     }
 
 }

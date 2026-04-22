@@ -8,6 +8,7 @@ import es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.exceptions.AppUse
 import es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.exceptions.ProjectNotFoundException;
 import es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.repositories.IssueRepository;
 import es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.saxhandlers.IssuesImportSaxHandler;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -138,6 +139,28 @@ public class IssueServiceImpl implements IssueService {
     public void importIssuesStax(InputStream issuesStream) throws XMLStreamException {
         List<Issue> issues = readIssuesFromXmlStax(issuesStream);
         issueRepository.saveAll(issues);
+    }
+
+    // Búsqueda usando QBE (Query By Example) de issues
+    @Override
+    public List<Issue> search(String title, IssueStatus status) {
+
+        Issue issue = new Issue();
+
+        if (title != null && !title.isBlank()){
+            issue.setTitle(title);
+        }
+
+        if (status != null){
+            issue.setStatus(status);
+        }
+
+        // Crear el ejemplo
+        Example<Issue> issueExample = Example.of(issue);
+
+
+        // Ejecutar la consulta QBE
+        return issueRepository.findAll(issueExample);
     }
 
     private void exportIssues(List<Issue> issues, XMLStreamWriter writer) throws XMLStreamException {
