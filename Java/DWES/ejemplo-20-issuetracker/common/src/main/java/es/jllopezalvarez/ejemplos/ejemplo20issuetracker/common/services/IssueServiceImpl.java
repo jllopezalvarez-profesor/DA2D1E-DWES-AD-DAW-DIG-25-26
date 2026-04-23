@@ -8,7 +8,9 @@ import es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.exceptions.AppUse
 import es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.exceptions.ProjectNotFoundException;
 import es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.repositories.IssueRepository;
 import es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.saxhandlers.IssuesImportSaxHandler;
-import org.springframework.data.domain.Example;
+import es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.specifications.IssueSpecifications;
+import org.springframework.data.domain.*;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -19,6 +21,7 @@ import javax.xml.stream.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -161,6 +164,27 @@ public class IssueServiceImpl implements IssueService {
 
         // Ejecutar la consulta QBE
         return issueRepository.findAll(issueExample);
+    }
+
+    @Override
+    public Page<Issue> search(
+            String text,
+            IssueStatus status,
+            Long projectId,
+            Long assigneeId,
+            LocalDate createdFrom,
+            LocalDate createdTo,
+            int page, int size,
+            String sortBy,
+            String sortDir) {
+
+        Specification<Issue> spec = IssueSpecifications.fromCriteria(
+                text, status, projectId, assigneeId, createdFrom, createdTo);
+
+        Sort sort = Sort.by(Sort.Direction.fromString(sortDir), sortBy);
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        return issueRepository.findAll(spec, pageable);
     }
 
     private void exportIssues(List<Issue> issues, XMLStreamWriter writer) throws XMLStreamException {

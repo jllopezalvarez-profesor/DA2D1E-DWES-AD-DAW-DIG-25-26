@@ -5,9 +5,7 @@ import es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.entities.Issue;
 import es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.entities.IssueStatus;
 import es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.mappers.IssueMapper;
 import es.jllopezalvarez.ejemplos.ejemplo20issuetracker.common.services.IssueService;
-import org.apache.catalina.connector.Response;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,7 +15,6 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -37,6 +34,7 @@ public class IssueController {
         this.issueService = issueService;
         this.issueMapper = issueMapper;
     }
+
 
     @GetMapping
     public ResponseEntity<List<IssueDto>> findAll() {
@@ -117,10 +115,11 @@ public class IssueController {
         return ResponseEntity.ok("Fichero recibido correctamente");
     }
 
+
     @GetMapping("/search")
     public ResponseEntity<List<IssueDto>> search(
-            @RequestParam(value = "t",required = false) String title,
-            @RequestParam(value = "s", required = false) IssueStatus status){
+            @RequestParam(value = "t", required = false) String title,
+            @RequestParam(value = "s", required = false) IssueStatus status) {
         List<Issue> foundIssues = issueService.search(title, status);
         return ResponseEntity.ok(issueMapper.map(foundIssues));
     }

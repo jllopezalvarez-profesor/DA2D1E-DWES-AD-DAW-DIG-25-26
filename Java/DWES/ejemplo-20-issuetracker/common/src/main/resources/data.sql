@@ -216,3 +216,67 @@ values
 (5, 4),
 (1, 5),
 (4, 5);
+
+-- Continuación de la inserción en la tabla ISSUE (Incidencias 51 a 100)
+
+insert into issue (assignee_id, reporter_id, project_id, title, description, status, created_at, updated_at)
+values
+    -- Proyecto 1: Gestión de Incidencias (IDs 51-60)
+    (1, 2, 1, 'Error en el borrado lógico', 'Los registros marcados como borrados siguen apareciendo.', 'OPEN', current_timestamp, current_timestamp),
+    (2, 3, 1, 'Refactorización de controladores', 'Limpieza de código en el módulo de autenticación.', 'IN_PROGRESS', current_timestamp, current_timestamp),
+    (NULL, 1, 1, 'Timeout en reportes largos', 'La conexión se cierra al generar reportes de más de 1 año.', 'OPEN', current_timestamp, current_timestamp),
+    (3, 2, 1, 'Ajuste de estilos CSS', 'El botón de "Enviar" se desalinea en pantallas pequeñas.', 'RESOLVED', current_timestamp, current_timestamp),
+    (1, 3, 1, 'Vulnerabilidad XSS detectada', 'Sanitizar inputs en el campo de comentarios.', 'CLOSED', current_timestamp, current_timestamp),
+    (2, 1, 1, 'Traducciones incompletas', 'Faltan textos en inglés en la configuración.', 'OPEN', current_timestamp, current_timestamp),
+    (3, 2, 1, 'Mejora en logs de auditoría', 'Incluir IP del usuario en los logs de acceso.', 'IN_PROGRESS', current_timestamp, current_timestamp),
+    (NULL, 3, 1, 'Fallo en carga masiva', 'El CSV de usuarios falla si tiene más de 500 filas.', 'OPEN', current_timestamp, current_timestamp),
+    (1, 2, 1, 'Error de concurrencia', 'Dos usuarios editando el mismo perfil causan error.', 'RESOLVED', current_timestamp, current_timestamp),
+    (2, 1, 1, 'Actualizar dependencias', 'Subir versión de la librería de seguridad.', 'CLOSED', current_timestamp, current_timestamp),
+
+    -- Proyecto 2: Portal de Clientes (IDs 61-70)
+    (3, 2, 2, 'Chatbot no responde', 'El widget de chat se queda en blanco al cargar.', 'OPEN', current_timestamp, current_timestamp),
+    (NULL, 1, 2, 'Logo corporativo pixelado', 'Cambiar el logo de la cabecera por versión SVG.', 'OPEN', current_timestamp, current_timestamp),
+    (1, 3, 2, 'Integración con Stripe falla', 'Los pagos con tarjeta 3D Secure dan error.', 'IN_PROGRESS', current_timestamp, current_timestamp),
+    (2, 2, 2, 'Email de bienvenida no enviado', 'Nuevos registros no reciben el correo automático.', 'RESOLVED', current_timestamp, current_timestamp),
+    (3, 1, 2, 'Error en histórico de pedidos', 'No se muestran pedidos anteriores a 2024.', 'OPEN', current_timestamp, current_timestamp),
+    (NULL, 2, 2, 'Sesión expira muy pronto', 'Aumentar el tiempo de vida del token JWT.', 'OPEN', current_timestamp, current_timestamp),
+    (1, 3, 2, 'SEO: Meta etiquetas faltantes', 'Añadir meta-tags en la página de productos.', 'IN_PROGRESS', current_timestamp, current_timestamp),
+    (2, 1, 2, 'Redirección incorrecta post-login', 'Envía a /home en lugar de a /dashboard.', 'RESOLVED', current_timestamp, current_timestamp),
+    (3, 2, 2, 'Fallo en carga de avatares', 'Las imágenes de Gravatar no se visualizan.', 'OPEN', current_timestamp, current_timestamp),
+    (1, 3, 2, 'Limpieza de base de datos', 'Eliminar tokens de recuperación caducados.', 'CLOSED', current_timestamp, current_timestamp),
+
+    -- Proyecto 3: Aplicación Móvil (IDs 71-80)
+    (2, 1, 3, 'Consumo excesivo de batería', 'La app consume un 20% en segundo plano.', 'IN_PROGRESS', current_timestamp, current_timestamp),
+    (3, 2, 3, 'Gesto de "Swipe" no detectado', 'No funciona el swipe para eliminar tareas en iOS.', 'OPEN', current_timestamp, current_timestamp),
+    (NULL, 3, 3, 'Pantalla blanca al inicio', 'Error aleatorio en el splash screen.', 'OPEN', current_timestamp, current_timestamp),
+    (1, 1, 3, 'Modo oscuro defectuoso', 'Textos negros sobre fondo negro en configuración.', 'RESOLVED', current_timestamp, current_timestamp),
+    (2, 2, 3, 'Error de geolocalización', 'La app no detecta la ciudad correctamente.', 'OPEN', current_timestamp, current_timestamp),
+    (3, 3, 3, 'Biometría no funciona', 'FaceID no se activa en el login.', 'IN_PROGRESS', current_timestamp, current_timestamp),
+    (NULL, 1, 3, 'Sonido de notificación molesto', 'Cambiar el tono por defecto por uno más suave.', 'OPEN', current_timestamp, current_timestamp),
+    (1, 2, 3, 'Cierre inesperado en galería', 'Crash al intentar adjuntar foto desde la cámara.', 'CLOSED', current_timestamp, current_timestamp),
+    (2, 3, 3, 'Texto fuera de contenedor', 'En pantallas pequeñas el título se solapa.', 'RESOLVED', current_timestamp, current_timestamp),
+    (3, 1, 3, 'Actualización forzosa', 'Implementar aviso de nueva versión disponible.', 'IN_PROGRESS', current_timestamp, current_timestamp),
+
+    -- Proyecto 4: Integración ERP (IDs 81-90)
+    (1, 2, 4, 'Mapeo de campos incorrecto', 'El campo "Ciudad" llega vacío al ERP.', 'IN_PROGRESS', current_timestamp, current_timestamp),
+    (2, 3, 4, 'Lentitud en la API', 'Endpoint de stock tarda más de 3 segundos.', 'OPEN', current_timestamp, current_timestamp),
+    (NULL, 1, 4, 'Error de codificación UTF-8', 'Nombres con tildes se ven mal en el ERP.', 'OPEN', current_timestamp, current_timestamp),
+    (3, 2, 4, 'Sincronización de precios', 'Precios con descuento no se aplican en destino.', 'RESOLVED', current_timestamp, current_timestamp),
+    (1, 3, 4, 'Fallo en conexión SFTP', 'No se pueden subir las facturas diarias.', 'OPEN', current_timestamp, current_timestamp),
+    (2, 1, 4, 'Validación de NIF/CIF', 'El sistema acepta formatos de DNI inválidos.', 'IN_PROGRESS', current_timestamp, current_timestamp),
+    (3, 2, 4, 'Duplicidad en proveedores', 'Se crean fichas nuevas en lugar de actualizar.', 'CLOSED', current_timestamp, current_timestamp),
+    (NULL, 3, 4, 'Alerta de stock negativo', 'El ERP permite procesar pedidos sin existencias.', 'OPEN', current_timestamp, current_timestamp),
+    (1, 1, 4, 'Refactor de colas RabbitMQ', 'Optimizar el procesamiento de mensajes.', 'RESOLVED', current_timestamp, current_timestamp),
+    (2, 2, 4, 'Log de errores saturado', 'Demasiados warnings por conexiones cerradas.', 'CLOSED', current_timestamp, current_timestamp),
+
+    -- Proyecto 5: Analítica de Datos (IDs 91-100)
+    (3, 1, 5, 'Predicción de ventas errónea', 'El modelo muestra valores negativos.', 'IN_PROGRESS', current_timestamp, current_timestamp),
+    (1, 2, 5, 'Exportar a PDF falla', 'El gráfico de tarta sale cortado en el PDF.', 'OPEN', current_timestamp, current_timestamp),
+    (2, 3, 5, 'Colores de leyenda confusos', 'Usar paleta accesible para daltónicos.', 'RESOLVED', current_timestamp, current_timestamp),
+    (NULL, 1, 5, 'Faltan datos de Q1', 'El dashboard no muestra enero y febrero.', 'OPEN', current_timestamp, current_timestamp),
+    (3, 2, 5, 'Carga lenta de BigQuery', 'Optimizar la query de agregación mensual.', 'IN_PROGRESS', current_timestamp, current_timestamp),
+    (1, 3, 5, 'Tooltip desaparece rápido', 'El usuario no llega a leer el dato del gráfico.', 'OPEN', current_timestamp, current_timestamp),
+    (2, 1, 5, 'Error en cálculo de KPI', 'El margen de beneficio no incluye impuestos.', 'RESOLVED', current_timestamp, current_timestamp),
+    (3, 2, 5, 'Mapa de calor vacío', 'No se cargan datos geográficos de ventas.', 'OPEN', current_timestamp, current_timestamp),
+    (NULL, 3, 5, 'Permisos en Dashboards', 'Usuarios de ventas ven dashboards de RRHH.', 'OPEN', current_timestamp, current_timestamp),
+    (1, 1, 5, 'Migración a Tableau', 'Preparar extracción de datos para nueva plataforma.', 'CLOSED', current_timestamp, current_timestamp);

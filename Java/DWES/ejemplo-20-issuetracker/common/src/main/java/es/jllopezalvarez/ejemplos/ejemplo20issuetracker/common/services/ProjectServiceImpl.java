@@ -40,4 +40,9 @@ public class ProjectServiceImpl implements ProjectService {
         }
         projectRepository.deleteById(projectId);
     }
+
+    @Override
+    public List<Project> findAll() {
+        return projectRepository.findAll(Sort.by("name"));
+    }
 }
