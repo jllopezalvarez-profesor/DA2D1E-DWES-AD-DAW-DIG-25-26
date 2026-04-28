@@ -1,0 +1,60 @@
+name: CI - Issue Tracker (Docker)
+
+on:
+  push:
+    branches: [ main ]
+    # Solo se dispara si hay cambios en esta ruta especfica
+    paths:
+      - 'Java/DWES/ejemplo-20-issuetracker/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'Java/DWES/ejemplo-20-issuetracker/**'
+
+# Configuramos el directorio de trabajo para todos los pasos
+defaults:
+  run:
+    working-directory: Java/DWES/ejemplo-20-issuetracker
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del cdigo
+        uses: actions/checkout@v4
+
+      - name: Levantar infraestructura con Docker Compose
+        run: docker-compose up -d --build
+
+      - name: Esperar a que la base de datos este lista
+        run: |
+          echo "Esperando a que issuetracker-db este Healthy..."
+          for i in {1..24}; do
+            if [ "$(docker inspect --format='{{.State.Health.Status}}' issuetracker-db)" == "healthy" ]; then
+              echo "Base de datos lista!"
+              break
+            fi
+            echo "Todava esperando... ($i)"
+            sleep 5
+          done
+
+      - name: Verificar API (Port 8000)
+        run: |
+          sleep 20
+          # Intentamos conectar a la API. Usamos localhost porque Docker mapea los puertos al host del runner.
+          curl -f http://localhost:8000/api/test || exit 1
+          echo "La API responde correctamente!"
+
+      - name: Verificar Web (Port 8080)
+        run: |
+          curl -f http://localhost:8080/login || exit 1
+          echo "La Web responde correctamente!"
+
+      - name: Logs en caso de fallo
+        if: failure()
+        run: docker-compose logs
+
+      - name: Limpiar
+        if: always()
+        run: docker-compose down

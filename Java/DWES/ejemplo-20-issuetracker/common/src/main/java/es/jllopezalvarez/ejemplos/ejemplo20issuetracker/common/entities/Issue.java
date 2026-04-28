@@ -25,8 +25,7 @@ public class Issue {
     private String title;
 
     @Basic(optional = false)
-    @Column(nullable = false)
-    @Lob
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
 
     @Builder.Default
@@ -35,11 +34,11 @@ public class Issue {
     private IssueStatus status = IssueStatus.OPEN;
 
     @Basic(optional = false)
-    @Column(nullable = false, columnDefinition = "timestamp default current_timestamp()", updatable = false)
+    @Column(nullable = false, columnDefinition = "timestamp default current_timestamp", updatable = false)
     private LocalDateTime createdAt;
 
     @Basic(optional = false)
-    @Column(nullable = false, columnDefinition = "timestamp default current_timestamp()")
+    @Column(nullable = false, columnDefinition = "timestamp default current_timestamp")
     private LocalDateTime updatedAt;
 
     @ManyToOne(optional = false)
