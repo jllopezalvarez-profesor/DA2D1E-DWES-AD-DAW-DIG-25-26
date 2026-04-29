@@ -2,14 +2,15 @@ name: CI - Issue Tracker (Docker)
 
 on:
   push:
-    branches: [ main ]
+    # Solo se dispara cuando el push es en la rama de pruebas CI/CD
+    branches: [ ci-cd-test ]
     # Solo se dispara si hay cambios en esta ruta especfica
     paths:
       - 'Java/DWES/ejemplo-20-issuetracker/**'
-  pull_request:
-    branches: [ main ]
-    paths:
-      - 'Java/DWES/ejemplo-20-issuetracker/**'
+  # pull_request:
+  #   branches: [ ci-cd-test ]
+  #   paths:
+  #     - 'Java/DWES/ejemplo-20-issuetracker/**'
 
 # Configuramos el directorio de trabajo para todos los pasos
 defaults:
@@ -21,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout del cdigo
+      - name: Checkout del código
         uses: actions/checkout@v4
 
       - name: Levantar infraestructura con Docker Compose
@@ -42,13 +43,14 @@ jobs:
       - name: Verificar API (Port 8000)
         run: |
           sleep 20
-          # Intentamos conectar a la API. Usamos localhost porque Docker mapea los puertos al host del runner.
+          # Intentamos conectar a la API. Usamos localhost porque Docker mapea los puertos al host del runner (la máquina que ejecuta la acción en GitHub).
           curl -f http://localhost:8000/api/test || exit 1
           echo "La API responde correctamente!"
 
       - name: Verificar Web (Port 8080)
         run: |
           curl -f http://localhost:8080/login || exit 1
+          # Intentamos conectar a la web. Usamos localhost porque Docker mapea los puertos al host del runner (la máquina que ejecuta la acción en GitHub).
           echo "La Web responde correctamente!"
 
       - name: Logs en caso de fallo
