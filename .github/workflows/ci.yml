@@ -44,7 +44,8 @@ jobs:
         run: |
           # En esto, --retry-connrefused reintenta si el puerto aún no está abierto, y -v muestra información detallada
           echo "Esperando a que la API esté lista en localhost:8000..."
-          curl --retry 10 \
+          curl -4 \
+          --retry 10 \
           --retry-delay 5 \
           --retry-connrefused \
           -v http://localhost:8000/api/test || exit 1
@@ -54,7 +55,8 @@ jobs:
         run: |
           # En esto, --retry-connrefused reintenta si el puerto aún no está abierto, y -v muestra información detallada
           echo "Esperando a que la web esté lista en localhost:8080..."
-          curl --retry 10 \
+          curl -4 \
+          --retry 10 \
           --retry-delay 5 \
           --retry-connrefused \
           -v http://localhost:8080/login || exit 1
