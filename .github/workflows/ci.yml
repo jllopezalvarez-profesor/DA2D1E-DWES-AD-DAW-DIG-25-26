@@ -42,25 +42,27 @@ jobs:
 
       - name: Verificar API (Port 8000)
         run: |
-          sleep 30
+          # sleep 30 # Comentamos esto porque se usa --retry-all-errors en curl, para que no solo reintente en connection refused
           # En esto, --retry-connrefused reintenta si el puerto aún no está abierto, y -v muestra información detallada
           echo "Esperando a que la API esté lista en localhost:8000..."
           curl -4 \
           --retry 10 \
           --retry-delay 5 \
-          --retry-connrefused \
+          # --retry-connrefused \
+          --retry-all-errors \
           -v http://localhost:8000/api/v1/tests || exit 1
           echo "La API responde correctamente!"          
 
       - name: Verificar Web (Port 8080)
         run: |
-          sleep 30
+          # sleep 30 # Comentamos esto porque se usa --retry-all-errors en curl, para que no solo reintente en connection refused
           # En esto, --retry-connrefused reintenta si el puerto aún no está abierto, y -v muestra información detallada
           echo "Esperando a que la web esté lista en localhost:8080..."
           curl -4 \
           --retry 10 \
           --retry-delay 5 \
-          --retry-connrefused \
+          # --retry-connrefused \
+          --retry-all-errors \
           -v http://localhost:8080/login || exit 1
           echo "La web responde correctamente!"  
 
