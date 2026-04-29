@@ -42,6 +42,7 @@ jobs:
 
       - name: Verificar API (Port 8000)
         run: |
+          sleep 30
           # En esto, --retry-connrefused reintenta si el puerto aún no está abierto, y -v muestra información detallada
           echo "Esperando a que la API esté lista en localhost:8000..."
           curl -4 \
@@ -53,6 +54,7 @@ jobs:
 
       - name: Verificar Web (Port 8080)
         run: |
+          sleep 30
           # En esto, --retry-connrefused reintenta si el puerto aún no está abierto, y -v muestra información detallada
           echo "Esperando a que la web esté lista en localhost:8080..."
           curl -4 \
