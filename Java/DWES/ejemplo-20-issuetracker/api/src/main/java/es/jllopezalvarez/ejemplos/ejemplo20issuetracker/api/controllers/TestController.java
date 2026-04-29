@@ -18,6 +18,11 @@ public class TestController {
         this.issueService = issueService;
     }
 
+    @GetMapping
+    public ResponseEntity<String> test(){
+        return ResponseEntity.ok("Conectado correctamente");
+    }
+
     @GetMapping("/count-derivada/{userId}")
     public ResponseEntity<NumericSimpleValueDto> testCountDerivada(@PathVariable Long userId) {
 

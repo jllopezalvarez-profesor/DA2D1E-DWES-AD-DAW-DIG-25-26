@@ -48,7 +48,7 @@ jobs:
           --retry 10 \
           --retry-delay 5 \
           --retry-connrefused \
-          -v http://localhost:8000/api/test || exit 1
+          -v http://localhost:8000/api/v1/tests || exit 1
           echo "La API responde correctamente!"          
 
       - name: Verificar Web (Port 8080)
